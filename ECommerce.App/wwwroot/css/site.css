@@ -16,3 +16,42 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 88vh;
+}
+
+.header-section {
+    flex-grow: 1;
+    background-image: url(../images/EcommerseHeadingImage.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header-content {
+    color: rgb(193, 147, 98);
+    font-family:'Javanese Text'
+}
+
+.new-account-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.new-account {
+    margin-top: 25vh;
+    background-color: rgba(210, 210, 210, 0.7);
+    border-radius: 30px;
+}
+
+.guest-button:hover, .signup-button:hover {
+    background-color: rgb(193, 147, 98);
+}
