@@ -26,7 +26,11 @@ namespace ECommerce.App.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult JoinUs()
+        {
+            return View();
+        }
 
 
 
