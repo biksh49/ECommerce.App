@@ -1,0 +1,143 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+
+
+
+
+
+<div class="centered-form">
+
+    <!-- ... (form content) ... -->
+    <h5>@ViewData["Title"]</h5>
+        @using (Html.BeginForm("Authenticate", "Home", FormMethod.Post))
+        {
+            <div class="form-group cubic-input">
+
+                <label for="Email">Email</label>
+                <input type="email" id="Email" name="userName" class="form-control" placeholder="name@gmail.com" required />
+            </div>
+            <div class="form-group cubic-input">
+                <label for="Password">Password</label>
+                <input type="password" id="Password" name="password" class="form-control " required />
+            </div>
+            <div class="form-group">
+                <a href="/ForgotPassword" class="forgot-password-link">Forgot Password?</a>
+            </div>
+            <div class="form-group">
+                <a href="/ForgotPassword" class="forgot-password-link">Already have an account?</a>
+            </div>
+            <button type="submit" class="btn btn-primary cubic-button">Sign In</button>
+
+        }
+       
+    
+</div>
+
+
+<style>
+
+
+    /* CSS for cubic-shaped form elements */
+    .centered-form h5 {
+        text-align: center;
+       
+    }
+    .btn-primary:hover {
+        color: yellow;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: yellow;
+        color: black;
+    }
+   
+    .cubic-input {
+        border: none;
+        border-bottom: 2px solid #3498db;
+        padding: 15px; /* Increase the padding to make the input fields larger */
+        margin-bottom: 20px;
+        transition: border-color 0.3s;
+    }
+
+    .centered-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 400px; /* Set the maximum width for the form container */
+        margin: 0 auto; /* Center the container horizontally */
+        background-color: #f7f7f7;
+        padding: 25px;
+        border: 1px solid #ccc; /* Add a border around the form container */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cubic-input:focus {
+        outline: none; /* Remove outline on focus */
+        border-color: #e74c3c; /* Change border color on focus */
+    }
+
+    .forgot-password-link {
+        color: #3498db; /* Change link color */
+        text-decoration: none; /* Remove underline */
+        font-weight: bold; /* Add emphasis */
+    }
+
+    .cubic-button {
+        border: none; /* Remove borders */
+        border-radius: 25px; /* Add rounded corners */
+        padding: 12px 30px; /* Adjust padding for the button */
+        background-color: #3498db; /* Change button background color */
+        color: #fff; /* Change button text color */
+        transition: background-color 0.3s; /* Add a smooth transition for the background color */
+    }
+
+
+
+    centered-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 400px; /* Set the maximum width for the form container */
+        margin: 0 auto; /* Center the container horizontally */
+        background-color: #f7f7f7;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: .5rem .9rem;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    
+
+</style>
+

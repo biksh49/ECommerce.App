@@ -21,7 +21,25 @@ namespace ECommerce.App.Controllers
         public IActionResult Privacy()
         {
             return View();
+
         }
+        public IActionResult SignIn()
+        {
+            return View();
+
+        }
+        public IActionResult SignUp()
+        {
+            return View();
+
+        }
+        public IActionResult Authenticate(AuthenticateUser authenticateUser)
+        {
+            ViewBag.User = "GoodMorning";
+            return View(authenticateUser);
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
