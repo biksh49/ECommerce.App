@@ -28,11 +28,11 @@
                 </div>
                 <div class="col-md-4">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput1" name="password" placeholder="password">
+                    <input type="password" class="form-control" id="exampleFormControlInput2" name="password" placeholder="password">
                 </div>
 
                 <div class="mb-3 ">
-                <input type="submit" value="Submit" />
+                <a id="linkSubmit">Submit</a>
                 
                 </div>
             </div>
@@ -42,5 +42,28 @@
            
         </div>
     </div>
-}
+    }
+     @section scripts{
+          <script>
+        $(document).ready(function(){
+            $("#linkSubmit").click(function(){
+               var email=$("#exampleFormControlInput1").val();
+               var password=$("#exampleFormControlInput2").val();
+               $.ajax({
+                      url: "/home/Authenticate?email="+email+ "&password="+password+"",
+                      type:"post",
+                      context: document.body
+                    }).done(function() {
+                      $( this ).addClass( "done" );
+               });
+               console.log(email);
+               console.log(password);
+               
+            });
+        alert("Hi Everyone!!!");
+        });
+    </script>
+     }
+   
+   
 
