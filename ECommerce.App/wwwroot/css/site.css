@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 main {
@@ -35,7 +35,7 @@ main {
 
 .header-content {
     color: rgb(193, 147, 98);
-    font-family:'Javanese Text'
+    font-family: 'Javanese Text'
 }
 
 .new-account-container {
@@ -54,6 +54,6 @@ main {
     border-radius: 30px;
 }
 
-.guest-button:hover, .signup-button:hover {
+.guest-button:hover, .signin-button:hover {
     background-color: rgb(193, 147, 98);
 }

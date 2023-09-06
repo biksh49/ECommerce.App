@@ -18,9 +18,9 @@ namespace ECommerce.App.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Signup(AuthenticateUser authenticateUser)
         {
-            return View();
+            return View(authenticateUser);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
