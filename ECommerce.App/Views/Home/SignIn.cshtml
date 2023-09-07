@@ -47,15 +47,23 @@
           <script>
         $(document).ready(function(){
             $("#linkSubmit").click(function(){
-               var email=$("#exampleFormControlInput1").val();
+                validateUser();
+                function validateUser(){
+                     var email=$("#exampleFormControlInput1").val();
                var password=$("#exampleFormControlInput2").val();
+               const authenticateUser = {userName:email, password:password};
+               const data = JSON.stringify(authenticateUser);
                $.ajax({
-                      url: "/home/Authenticate?email="+email+ "&password="+password+"",
+                      url: "/home/Authenticate?",
                       type:"post",
+                      contentType:"application/json",
+                      data:data,
                       context: document.body
                     }).done(function() {
                       $( this ).addClass( "done" );
                });
+                }
+              
                console.log(email);
                console.log(password);
                
