@@ -54,6 +54,11 @@ main {
     border-radius: 30px;
 }
 
+.signin-button {
+    background-color:dodgerblue;
+    color: white;
+}
+
 .guest-button:hover, .signin-button:hover {
     background-color: rgb(193, 147, 98);
 }
