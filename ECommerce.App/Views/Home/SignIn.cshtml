@@ -22,35 +22,42 @@
             @using (@Html.BeginForm("Authenticate", "Home", FormMethod.Post))
             {
                 <div class="row">
-                <div class="col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" name="userName" placeholder="name@example.com">
-                </div>
-                <div class="col-md-4">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput2" name="password" placeholder="password">
-                </div>
+                    <div class="col-md-4">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" name="userName" placeholder="name@example.com">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" name="password" placeholder="password">
+                    </div>
 
-                <div class="mb-3 ">
-                <a id="linkSubmit">Submit</a>
-                
+                    <div class="mb-3 ">
+                        <a id="linkSubmit">Submit</a>
+
+                    </div>
                 </div>
-            </div>
             }
-            
-       
-           
+
+
+
         </div>
     </div>
-    }
-     @section scripts{
+}
+    @*@section scripts{
           <script>
         $(document).ready(function(){
-           authentication.validateUser();
+            authentication.initialize();
+            authentication.authenticateuser();
+           
         alert("Hi Everyone!!!");
         });
     </script>
-     }
-   
-   
+     }*@
+
+
+
+
+     
+
+
 
