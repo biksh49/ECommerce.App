@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 using System.IO;
+using ECommerce.App.Helper;
 
 namespace ECommerce.App.Controllers
 {
@@ -33,7 +34,8 @@ namespace ECommerce.App.Controllers
         {
             return View();
         }
-        public IActionResult Authenticate(AuthenticateUser authenticateUser)
+        [HttpPost]
+        public IActionResult Authenticate([FromForm]AuthenticateUser authenticateUser)
         {
             //StreamWriter sw = new StreamWriter("users.json");
             //string students = string.Empty;
@@ -64,19 +66,22 @@ namespace ECommerce.App.Controllers
             //List<AuthenticateUser> databaseUser = JsonSerializer.Deserialize<List<AuthenticateUser>>(jsonString);
 
 
-           List<AuthenticateUser> databaseUser= JsonConvert.DeserializeObject<List<AuthenticateUser>>(lines);
-           
-            foreach (var user in databaseUser)
-            {
-                if (user.UserName == authenticateUser.UserName && user.Password == authenticateUser.Password)
-                {
-                    return View(authenticateUser);
-                }
-                else
-                {
-                    return View("~/Views/Home/Unauthorized.cshtml");
-                }
-            }
+            //List<AuthenticateUser> databaseUser= JsonConvert.DeserializeObject<List<AuthenticateUser>>(lines);
+
+            // foreach (var user in databaseUser)
+            // {
+            //     if (user.UserName == authenticateUser.UserName && user.Password == authenticateUser.Password)
+            //     {
+            //         return View(authenticateUser);
+            //     }
+            //     else
+            //     {
+            //         return View("~/Views/Home/Unauthorized.cshtml");
+            //     }
+            // }
+
+            DbHelper dbHelper = new DbHelper();
+            var users=dbHelper.GetAllUsers();
            
             return View();
           

@@ -1,30 +1,28 @@
 ﻿
 var authentication = (function () {
+    //constant.initialize();
     return {
-        //initialize: function () {
-        //    attachHandler();
-           
-        //},
+        initialize: function () {
+            attachHandler();
+        },
         authenticateUser: function () {
-            validateuser();
+            authenticateUser();
         }
     };
     function attachHandler() {
-       
+        $('body').on('click', '#lnkSubmit', function () {
+            console.log("Here");
+            authentication.authenticateUser();
+        });
+        
     }
-    function validateuser() {
+    function authenticateUser() {
         var email = $("#exampleFormControlInput1").val();
         var password = $("#exampleFormControlInput2").val();
-        const authenticateuser = { username: email, password: password };
-        const data = JSON.stringify(authenticateuser);
-        $.ajax({
-            url: "/home/Authenticate?email=" + email + "&password=" + password + "",
-            type: "post",
-            context: document.body
-        }).done(function () {
-            $(this).addClass("done");
+        const authenticateUser = { username: email, password: password };
+        const data = JSON.stringify(authenticateUser);
+        helper.makeRequest("/Home/Authenticate", "post", "application/json", data, function () {
+
         });
-
-
     } 
 })();
