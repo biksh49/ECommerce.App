@@ -27,9 +27,15 @@ namespace ECommerce.App.Controllers
             return View();
         }
 
-        public IActionResult JoinUs()
+        public IActionResult SignUp()
         {
             return View();
+        }
+
+        public IActionResult Authenticate(AuthenticateUser authenticateuser)
+        {
+            ViewBag.User = "GoodMorning";
+            return View(authenticateuser);
         }
 
 

@@ -1,19 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    <div>SignIn
-    </div>
-    <div>
-        <label for="username">UserName</label>
-        <input type="text" id="username" name="username" style="margin-bottom: 10px;"> <br>
+﻿    
+    @using (@Html.BeginForm("Authenticate","Home",FormMethod.Post))
+    {
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
 
-        <label for="password">Password</label>
-        <input type="password" id="pwd" name="pwd" style="margin-bottom: 10px;"> <br>
+                            <div class="mb-md-5 mt-md-4 pb-5">
 
-        <input type="submit" style="margin-bottom: 10px;">
-        <input type="reset"><br><br>
-    </div>
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="email" class="form-control form-control-lg" name="Email" />
+                                    <label class="form-label" for="email" >Email</label>
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" id="password" class="form-control form-control-lg" name="Password" />
+                                    <label class="form-label" for="password" >Password</label>
+                                </div>
+
+                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+                               <a id  ="linkSubmit">Submit</a>
+
+
+
+                            </div>
+
+                            <div>
+                                <p class="mb-0">
+                                    Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#linkSubmit").click(function(){
+                var email = $("#email").val();
+                var password = $("#password").val();
+                console.log(email);
+                console.log(password);
+            });
+            alert("HI!!!! Everyone ");
+
+        });
+    </script>
+
+    }
     
-}
