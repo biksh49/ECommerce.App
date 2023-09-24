@@ -1,5 +1,6 @@
 ﻿using ECommerce.App.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace ECommerce.App.Controllers
@@ -32,10 +33,37 @@ namespace ECommerce.App.Controllers
             return View();
         }
 
-        public IActionResult Authenticate(AuthenticateUser authenticateuser)
+        public IActionResult Authenticate([FromBody]AuthenticateUser authenticateuser)
         {
+            //StreamWriter sw = new StreamWriter("user.json");
+            //sw.WriteLine("Hi Everyone!!");
+            //sw.Close();
+
+            StreamReader sr = new StreamReader("User.json");
+            string lines = sr.ReadToEnd();
+            sr.Close();
+
             ViewBag.User = "GoodMorning";
-            return View(authenticateuser);
+            //string json = @"{
+            //                     'Email':'dahalsujan643@gmail.com',
+            //                     'Password' : 'qwerty123'
+            //             }";
+            List<AuthenticateUser> databaseUser = JsonConvert.DeserializeObject<List<AuthenticateUser>>(lines);
+            foreach (AuthenticateUser user in databaseUser)
+            {
+
+                if (user.Email == authenticateuser.Email && user.Password == authenticateuser.Password)
+                {
+                    return View(authenticateuser);
+
+                }
+                else
+                {
+                    return View("~/Views/Home/Unauthorized.cshtml");
+                }
+               
+            }
+            return View();
         }
 
 

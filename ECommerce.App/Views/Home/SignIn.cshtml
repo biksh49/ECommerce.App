@@ -1,5 +1,5 @@
-﻿    
-        <div class="container py-5 h-100">
+﻿      
+      <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -22,7 +22,7 @@
 
                                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-                               <button button  ="linkSubmit">Submit</button>
+                               <button id  ="linkSubmit" input type = "submit" value="Submit">Submit</button>
 
 
 
@@ -39,31 +39,17 @@
                 </div>
             </div>
         </div>
-
+    
 
     @section scripts{
     <script>
         $(document).ready(function () {
-            $("#linkSubmit").click(function(){
-                var email = $("#email").val();
-                var password = $("#password").val();
-
-                $.ajax({
-                    url: "/home/Authenticate?email="+email+ "&password=" +password+"",
-                    type:"post",
-                    oncontext: document.body
-                }).done(function () { 
-                    $(this).addClass( "done" );               
-                });
-
-                console.log(email);
-                console.log(password);
-            });
+            
             alert("HI!!!! Everyone ");
 
         });
     </script>
     }
 
-
+    
     
