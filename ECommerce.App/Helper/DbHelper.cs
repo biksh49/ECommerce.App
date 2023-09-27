@@ -23,7 +23,7 @@ namespace ECommerce.App.Helper
             }
         }
 
-        public List<User>GetAllUsers()121   
+        public List<User>GetAllUsers()
 		{
             var sql = "select * from tblUsers";
             var users = new List<User>();
