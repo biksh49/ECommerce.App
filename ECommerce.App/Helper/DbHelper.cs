@@ -7,13 +7,18 @@ namespace ECommerce.App.Helper
 {
 	public class DbHelper:IDbHelper
     {
-        
+        private readonly ConnectionStrings _dbContext;
+
+        public DbHelper(ConnectionStrings dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public bool DeleteUserByID(int userID)
         {
             bool isDeleted = false;
             var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            using (var connection = new SqlConnection(_dbContext.DefaultConnection))
             {
                 var user = connection.QueryFirstOrDefault<User>(sql);
                 isDeleted = user != null ? true : false;
@@ -27,7 +32,7 @@ namespace ECommerce.App.Helper
 		{
             var sql = "select * from tblUsers";
             var users = new List<User>();
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString))
             {
                 users = connection.Query<User>(sql).ToList();
                 return users;
@@ -38,7 +43,7 @@ namespace ECommerce.App.Helper
         public User GetUserByID(int userID)
         {
             var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString))
             {
                 var user = connection.QueryFirstOrDefault<User>(sql);
                 return user;

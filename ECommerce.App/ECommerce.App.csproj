@@ -18,7 +18,6 @@
     <None Remove="Service\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
     <Folder Include="Service\" />
   </ItemGroup>
 </Project>

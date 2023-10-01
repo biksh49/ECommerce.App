@@ -21,7 +21,7 @@ var authentication = (function () {
         var password = $("#exampleFormControlInput2").val();
         const authenticateUser = { username: email, password: password };
         const data = JSON.stringify(authenticateUser);
-        helper.makeRequest("/Home/Authenticate", "post", "application/json", data, function () {
+        helper.makeRequest("/Account/Authenticate", "post", "application/json", data, function () {
 
         });
     } 
