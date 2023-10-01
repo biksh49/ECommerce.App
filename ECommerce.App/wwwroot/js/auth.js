@@ -16,11 +16,11 @@
 
     }
     function authenticateUser() {
-        var email = $("#exampleFormControlInput1").val();
-        var password = $("#exampleFormControlInput2").val();
+        var email = $("#Email").val();
+        var password = $("#Password").val();
         const authenticateUser = { username: email, password: password };
         const data = JSON.stringify(authenticateUser);
-        helper.makeRequest("/Home/Authenticate", "post", "application/json", data, function () {
+        helper.makeRequest("/Account/Authenticate", "post", "application/json", data, function () {
 
         });
     }

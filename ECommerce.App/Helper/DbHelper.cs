@@ -9,13 +9,13 @@ namespace ECommerce.App.Helper
     {
 
 
-        public bool DeleteUserByID(int userID)
+        public bool DeletetblUserByID(int userID)
         {
             bool isDeleted = false;
-            var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            var sql = $"select * from tblUser where userID={userID}";
+            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
-                var user = connection.QueryFirstOrDefault<User>(sql);
+                var user = connection.QueryFirstOrDefault<tblUser>(sql);
                 isDeleted = user != null ? true : false;
 
                 return isDeleted;
@@ -23,30 +23,30 @@ namespace ECommerce.App.Helper
             }
         }
 
-        public List<User> GetAllUsers()
+        public List<tblUser> GetAlltblUsers()
         {
-            var sql = "select * from tblUsers";
-            var users = new List<User>();
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            var sql = "select * from tblUser";
+            var users = new List<tblUser>();
+            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
-                users = connection.Query<User>(sql).ToList();
+                users = connection.Query<tblUser>(sql).ToList();
                 return users;
 
             }
         }
 
-        public User GetUserByID(int userID)
+        public tblUser GettblUserByID(int userID)
         {
-            var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            var sql = $"select * from tblUser where userID={userID}";
+            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
-                var user = connection.QueryFirstOrDefault<User>(sql);
+                var user = connection.QueryFirstOrDefault<tblUser>(sql);
                 return user;
 
             }
         }
 
-        public User UpdateUserByID(User user)
+        public tblUser UpdatetblUserByID(tblUser user)
         {
             return null;
             //var sql = $"select * from tblUsers where userID={userID}";

@@ -2,7 +2,7 @@
 using ECommerce.App.Models;
 using System.Data.SqlClient;
 using Dapper;
-us
+
 
 
 namespace ECommerce.App.Service
@@ -16,10 +16,10 @@ namespace ECommerce.App.Service
         public bool AuthenticateUser(string email, string password)
         {
             bool isUserAuthenticated = false;
-            var sql = $"select * from tblUsers where Email={email} and password={password}";
-            using (var connection = new MySqlConnection("server=root@localhost:3306;database=Ecommerce;Password=root@1234"))
+            var sql = $"select * from tblUsers where Email={email} And  password={password}";
+            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
-                var user = connection.QueryFirstOrDefault<User>(sql);
+                var user = connection.QueryFirstOrDefault<tblUser>(sql);
                 isUserAuthenticated = user != null ? true : false;
 
             }
