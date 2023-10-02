@@ -31,6 +31,11 @@ namespace e_commerce.Controllers
         {
             return View();
         }
+        public IActionResult Authenticate(AuthenticateUser authenticateUser)
+        {
+            ViewBag.Users = "GoodMorning";
+            return View(AuthenticateUser);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
