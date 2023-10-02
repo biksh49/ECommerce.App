@@ -13,7 +13,7 @@ namespace ECommerce.App.Service
             // For example, you can insert the user data into the database
             // Make sure to validate and hash the password before storing it in the database
 
-            using (var connection = new SqlConnection("YourConnectionStringHere"))
+            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
                 try
                 {
