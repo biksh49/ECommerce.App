@@ -11,12 +11,29 @@
             contentType: contentType,
             data: data,
             context: document.body
-        }).done(function () {
-            callback("success");
-        })
-        .error(function () {
+        }).done(function (res, status, xhr) {
+            callback(res);
+        }).fail(function (res, status, xhr) {
+            switch (xhr.status) {
+                case 401:
+                    alert("Unauthorized!!");
+                    break;
+                case 404:
+                    alert("Page Not Found!!");
+                    break;
+                case 400:
+                    document.getElementById('toastMessageBody').innerText = xhr.responseText;
+                    var head = document.getElementById('toastheadertext');
+                    head.style.color = 'red';
+                    head.innerText = 'Error';
+                    $('.toast').toast('show');
+                    break;
+                default:
+                    alert('An error occurred');
+                    break;
+            }
 
-        });
+        })
     }
 
 

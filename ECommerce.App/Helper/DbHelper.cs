@@ -18,7 +18,7 @@ namespace ECommerce.App.Helper
         {
             bool isDeleted = false;
             var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection(_dbContext.DefaultConnection))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var user = connection.QueryFirstOrDefault<User>(sql);
                 isDeleted = user != null ? true : false;
@@ -32,7 +32,7 @@ namespace ECommerce.App.Helper
 		{
             var sql = "select * from tblUsers";
             var users = new List<User>();
-            using (var connection = new SqlConnection(Helper.Constant.ConnectionString))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 users = connection.Query<User>(sql).ToList();
                 return users;
@@ -43,7 +43,7 @@ namespace ECommerce.App.Helper
         public User GetUserByID(int userID)
         {
             var sql = $"select * from tblUsers where userID={userID}";
-            using (var connection = new SqlConnection(Helper.Constant.ConnectionString))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var user = connection.QueryFirstOrDefault<User>(sql);
                 return user;

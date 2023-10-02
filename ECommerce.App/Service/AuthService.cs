@@ -20,8 +20,8 @@ namespace ECommerce.App.Service
         public bool AuthenticateUser(string email, string password)
         {
             bool isUserAuthenticated = false;
-            var sql = $"select * from tblUsers where Email={email} and password={password}";
-            using (var connection = new MySqlConnection(_dbContext.DefaultConnection))
+            var sql = $"select * from tblUser where Email={email} and password={password}";
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var user = connection.QueryFirstOrDefault<User>(sql);
                 isUserAuthenticated = user != null ? true : false;

@@ -1,5 +1,6 @@
 ﻿using ECommerce.App.Models;
 using ECommerce.App.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.App.Controllers
@@ -21,8 +22,9 @@ namespace ECommerce.App.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult AuthenticateUser(AuthenticateUser user)
+        public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
             bool isUserAuthenticated = _authService.AuthenticateUser(user.Email, user.Password);
             if (isUserAuthenticated)
@@ -31,7 +33,8 @@ namespace ECommerce.App.Controllers
             }
             else
             {
-                return View("Unauthorized");
+                return RedirectToAction("Index", "Home");
+                //return Unauthorized("It seem's user is not authorized!!!");
             }
             return View();
         }

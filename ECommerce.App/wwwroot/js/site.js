@@ -4,7 +4,7 @@
         
         authentication.initialize();
         //constant.initialize();
-        authentication.authenticateUser();
+        //authentication.authenticateUser();
         
         
     });

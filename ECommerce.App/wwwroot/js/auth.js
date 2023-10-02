@@ -19,10 +19,11 @@ var authentication = (function () {
     function authenticateUser() {
         var email = $("#exampleFormControlInput1").val();
         var password = $("#exampleFormControlInput2").val();
-        const authenticateUser = { username: email, password: password };
+        const authenticateUser = { email: email, password: password };
         const data = JSON.stringify(authenticateUser);
-        helper.makeRequest("/Account/Authenticate", "post", "application/json", data, function () {
-
+        helper.makeRequest("/Account/AuthenticateUser", "post", "application/json", data, function (response) {
+            window.location.reload();
+            // $("#content-wrapper").html(response);
         });
     } 
 })();
