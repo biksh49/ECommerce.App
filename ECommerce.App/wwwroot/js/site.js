@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     authentication.initialize();
     //constant.initialize();
-    authentication.authenticateUser();
+  /*  authentication.authenticateUser();*/
 
 
 });

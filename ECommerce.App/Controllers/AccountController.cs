@@ -48,7 +48,7 @@ namespace ECommerce.App.Controllers
             bool isUserAuthenticated = _authService.AuthenticateUser(authenticateUser.UserName, authenticateUser.Password);
             if (isUserAuthenticated)
             {
-                return View();
+                return View(authenticateUser);
             }
             else
             {

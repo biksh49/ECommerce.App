@@ -16,7 +16,7 @@ namespace ECommerce.App.Service
         public bool AuthenticateUser(string email, string password)
         {
             bool isUserAuthenticated = false;
-            var sql = $"select * from tblUsers where Email={email} And  password={password}";
+            var sql = $"select * from tblUser where Email='{email}' And  password='{password}'";
             using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
             {
                 var user = connection.QueryFirstOrDefault<tblUser>(sql);
