@@ -39,7 +39,7 @@ namespace ECommerce.App.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SignUp(RegisterUser registerUser)
+        public IActionResult Register(RegisterUser registerUser)
         {
             if (ModelState.IsValid)
             {
