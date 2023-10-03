@@ -34,7 +34,7 @@ namespace e_commerce.Controllers
         public IActionResult Authenticate(AuthenticateUser authenticateUser)
         {
             ViewBag.Users = "GoodMorning";
-            return View(AuthenticateUser);
+            return View(authenticateUser);
         }
 
 
