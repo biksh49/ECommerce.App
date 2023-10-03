@@ -9,7 +9,8 @@ namespace ECommerce.App.Helper
 		public User UpdateUserByID(User user);
 		public bool DeleteUserByID(int userID);
 		public User GetUserByID(int userID);
-		//public User AuthenticateUser(string userEmail,string password);
-	}
+		public IEnumerable<State> GetStates();
+        //public User AuthenticateUser(string userEmail,string password);
+    }
 }
 

@@ -1,4 +1,5 @@
-﻿using ECommerce.App.Models;
+﻿using ECommerce.App.Helper;
+using ECommerce.App.Models;
 using ECommerce.App.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace ECommerce.App.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly IDbHelper _dbHelper;
 
-        public AccountController(IAuthService authService) 
+        public AccountController(IAuthService authService,IDbHelper dbHelper) 
         {
             _authService = authService;
+            _dbHelper = dbHelper;
         }
 
         public IActionResult SignIn()
@@ -20,6 +23,8 @@ namespace ECommerce.App.Controllers
         }
         public IActionResult SignUp()
         {
+            //var states=_dbHelper.GetStates();
+            ViewBag.States=_dbHelper.GetStates();
             return View();
         }
         [AllowAnonymous]

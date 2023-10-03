@@ -11,7 +11,7 @@
             contentType: contentType,
             data: data,
             context: document.body
-        }).done(function (res, status, xhr) {
+        }).done(function (res,status,xhr) {
             callback(res);
         }).fail(function (res, status, xhr) {
             switch (xhr.status) {

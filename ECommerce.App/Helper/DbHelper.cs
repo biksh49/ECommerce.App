@@ -62,6 +62,18 @@ namespace ECommerce.App.Helper
 
             //}
         }
-    }
+
+        public IEnumerable<State> GetStates()
+        {
+            var sql = "select * from tblState";
+            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            {
+                var states = connection.Query<State>(sql);
+                return states;
+
+            }
+
+        }
+    } 
 }
 

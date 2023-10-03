@@ -22,8 +22,8 @@ var authentication = (function () {
         const authenticateUser = { email: email, password: password };
         const data = JSON.stringify(authenticateUser);
         helper.makeRequest("/Account/AuthenticateUser", "post", "application/json", data, function (response) {
-            window.location.reload();
-            // $("#content-wrapper").html(response);
+            //window.location.reload();
+             $("#content-wrapper").html(response);
         });
     } 
 })();
