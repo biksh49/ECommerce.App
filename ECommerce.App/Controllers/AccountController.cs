@@ -10,14 +10,20 @@ namespace ECommerce.App.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IDbHelper _dbHelper;
+        private readonly IUserService _userService;
 
-        public AccountController(IAuthService authService,IDbHelper dbHelper) 
+        public AccountController(IAuthService authService,IDbHelper dbHelper,IUserService userService) 
         {
             _authService = authService;
             _dbHelper = dbHelper;
+            _userService = userService;
         }
 
         public IActionResult SignIn()
+        {
+            return View();
+        }
+        public IActionResult Index()
         {
             return View();
         }
@@ -31,17 +37,23 @@ namespace ECommerce.App.Controllers
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
-            bool isUserAuthenticated = _authService.AuthenticateUser(user.Email, user.Password);
-            if (isUserAuthenticated)
+            var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
+            if (userDetails)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return RedirectToAction("Index", "Home");
-                //return Unauthorized("It seem's user is not authorized!!!");
+                //return RedirectToAction("Index", "Home");
+                return PartialView("UnAuthorized");
             }
-            return View();
+            
+        }
+        public User RegisterUser(User user)
+        {
+            _userService.CreateUser(user);
+            var userDetails = _userService.GetUserByID(userID);
+            return userDetails;
         }
     }
 }

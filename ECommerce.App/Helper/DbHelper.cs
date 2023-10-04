@@ -66,7 +66,7 @@ namespace ECommerce.App.Helper
         public IEnumerable<State> GetStates()
         {
             var sql = "select * from tblState";
-            using (var connection = new SqlConnection("server=root@localhost:3306; database=Ecommerce; Integrated Security=true;Password=root@1234"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var states = connection.Query<State>(sql);
                 return states;
