@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using ECommerce.App.Helper;
 using ECommerce.App.Service;
-using ECommerce.App.ViewsModels;
+using ECommerce.App.Models;
 
 namespace ECommerce.App.Controllers
 {

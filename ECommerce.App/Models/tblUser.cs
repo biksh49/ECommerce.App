@@ -26,7 +26,7 @@ namespace ECommerce.App.Models
         //[StringLength(50, ErrorMessage = "Password cannot exceed 50 characters.")]
         public string Password { get; set; }
 
-        public int? ContactNumber { get; set; }
+        public string? ContactNumber { get; set; }
 
         public int? Age { get; set; }
 

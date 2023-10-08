@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ECommerce.App.ViewsModels
+namespace ECommerce.App.Models
 {
     public class AuthenticateUser
     {
