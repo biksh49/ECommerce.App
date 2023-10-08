@@ -8,7 +8,7 @@ namespace ECommerce.App.Service
     {
         public  void CreateUser(User user)
         {
-            var sql = $"Insert into tblUser values ('{user.Name}',{user.Age},'{user.Email}',{user.ContactNumber},'{user.Address}',{user.Password})";
+            var sql = $"Insert into tblUser values ('{user.Name}',{user.Age},'{user.Email}',null,'{user.Address}','{user.Password}')";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 connection.Execute(sql);

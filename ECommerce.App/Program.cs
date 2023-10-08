@@ -2,12 +2,23 @@ using System.Globalization;
 using ECommerce.App.Helper;
 using ECommerce.App.Models;
 using ECommerce.App.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //var config = builder.Configuration.GetSection("ConnectionString");
+
+builder.Services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", o =>
+{
+    o.Cookie.Name = ".MyApp";
+    o.LoginPath = "/home/index";
+    o.SlidingExpiration = true;
+    o.ExpireTimeSpan = TimeSpan.FromHours(12);
+
+    o.Cookie.SameSite = SameSiteMode.Strict;
+});
 builder.Services.AddControllersWithViews();
 var db=builder.Configuration.GetSection("ConnectionStrings:DefaultConnection");
 //builder.Services.AddOptions<ConnectionStrings>().BindConfiguration(nameof(ConnectionStrings))
@@ -26,6 +37,7 @@ builder.Services.AddSingleton(dbContext);
 builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddTransient<IDbHelper,DbHelper>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 
 

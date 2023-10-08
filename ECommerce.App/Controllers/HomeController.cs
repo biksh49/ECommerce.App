@@ -7,9 +7,11 @@ using System.IO;
 using ECommerce.App.Helper;
 using ECommerce.App.Service;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.App.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ConnectionStrings _dbContexts;

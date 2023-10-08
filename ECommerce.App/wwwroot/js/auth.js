@@ -14,6 +14,10 @@ var authentication = (function () {
             console.log("Here");
             authentication.authenticateUser();
         });
+        $('body').on('click', '#lnkSignUp', function () {
+            //console.log("Here");
+            registerUser();
+        });
         
     }
     function authenticateUser() {
@@ -26,4 +30,20 @@ var authentication = (function () {
              $("#content-wrapper").html(response);
         });
     } 
+    function registerUser() {
+        var email = $("#inputEmail4").val();
+        var password = $("#inputPassword4").val();
+        var address = $("#inputAddress").val();
+       // var address2 = $("#inputAddress2").val();
+        var state = $("#inputState").val();
+        var name = $("#inputName").val();
+        var age = $("#inputAge").val();
+        //var password = $("#exampleFormControlInput2").val();
+        const registerUser = { email: email, password: password,address:address,state:state,name:name,age:age };
+        const data = JSON.stringify(registerUser);
+        helper.makeRequest("/Account/RegisterUser", "post", "application/json", data, function (response) {
+            //window.location.reload();
+            $("#content-wrapper").html(response);
+        });
+    }
 })();
