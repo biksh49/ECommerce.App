@@ -10,7 +10,7 @@ internal class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IDbHelper, DbHelper>();
         builder.Services.AddTransient<IAuthService, AuthService>();
-        builder.Services.AddTransient<IUserService,RegistrationUser>();
+        //builder.Services.AddTransient<IUserService,RegistrationUser>();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();

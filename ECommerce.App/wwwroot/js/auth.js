@@ -9,7 +9,7 @@
         }
     };
     function attachHandler() {
-        $('body').on('click', '#lnkSubmit', function () {
+        $('body').on('click', '#SignIn', function () {
             console.log("Here");
             authentication.authenticateUser();
         });

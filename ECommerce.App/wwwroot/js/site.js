@@ -5,7 +5,7 @@ $(document).ready(function () {
   //  constant.initialize();
     /*  authentication.authenticateUser();*/
     // Initialize the registerUser module
-    registerUser.initialize();
+   // registerUser.initialize();
 
 
 });

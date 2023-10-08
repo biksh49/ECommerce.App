@@ -9,9 +9,9 @@
     };
 
     function attachHandler() {
-        $('body').on('click', '#lnkSubmit', function (event) {
+        $('body').on('click', '#linkSignUp', function (event) {
             event.preventDefault();
-            registerUser.registerUser();
+              registerUser();
         });
     }
 
@@ -39,7 +39,7 @@
 
         // Make an AJAX request to the server to register the user
      
-        helper.makeRequest("/Account/Register", "post", "application/json; charset=utf-8", data, function () {
+        helper.makeRequest("/Account/Register", "post", "application/json", jsonData, function () {
 
         });
     }

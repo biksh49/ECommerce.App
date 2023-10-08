@@ -1,12 +1,11 @@
-﻿
-using ECommerce.App.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 using System.IO;
 using ECommerce.App.Helper;
 using ECommerce.App.Service;
+using ECommerce.App.ViewsModels;
 
 namespace ECommerce.App.Controllers
 {
@@ -18,13 +17,13 @@ namespace ECommerce.App.Controllers
         private readonly IDbHelper _dbHelper;
         private readonly IAuthService _authService;
         
-        private readonly IUserService _userService;
-        public AccountController(ILogger<HomeController> logger, IDbHelper dbHelper, IAuthService authService, IUserService userService)
+       // private readonly IUserService _userService;
+        public AccountController(ILogger<HomeController> logger, IDbHelper dbHelper, IAuthService authService)
         {
             _logger = logger;
             _dbHelper = dbHelper;
             _authService = authService;
-            _userService = userService;
+          //  _userService = userService;
         }
         public IActionResult Index()
         {
@@ -39,38 +38,38 @@ namespace ECommerce.App.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(RegisterUser registerUser)
-        {
-            if (ModelState.IsValid)
-            {
-                var newUser = new tblUser
-                {
-                    Name = registerUser.Name,
-                    Address = registerUser.Address,
-                    Email = registerUser.Email,
-                    Password = registerUser.Password,
-                    ContactNumber = registerUser.ContactNumber,
-                    Age = registerUser.Age,
-                    DOB = registerUser.DOB
-                };
+        //public IActionResult Register(RegisterUser registerUser)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newUser = new tblUser
+        //        {
+        //            Name = registerUser.Name,
+        //            Address = registerUser.Address,
+        //            Email = registerUser.Email,
+        //            Password = registerUser.Password,
+        //            ContactNumber = registerUser.ContactNumber,
+        //            Age = registerUser.Age,
+        //            DOB = registerUser.DOB
+        //        };
 
-                bool isRegistered = _userService.RegisterUser(newUser);
+        //        bool isRegistered = _userService.RegisterUser(newUser);
 
-                if (isRegistered)
-                {
-                    // Redirect to a success page, login page, or other appropriate action
-                    return RedirectToAction("SignIn");
-                }
-                else
-                {
-                    // Handle the case where registration failed (e.g., display an error message)
-                    ModelState.AddModelError(string.Empty, "Registration failed. Please try again.");
-                }
-            }
+        //        if (isRegistered)
+        //        {
+        //            // Redirect to a success page, login page, or other appropriate action
+        //            return RedirectToAction("SignIn");
+        //        }
+        //        else
+        //        {
+        //            // Handle the case where registration failed (e.g., display an error message)
+        //            ModelState.AddModelError(string.Empty, "Registration failed. Please try again.");
+        //        }
+        //    }
 
-            // If the model state is not valid, return to the sign-up view with validation errors
-            return View(registerUser);
-        }
+        //    // If the model state is not valid, return to the sign-up view with validation errors
+        //    return View(registerUser);
+        //}
 
 
         public IActionResult ForgetPassword()
@@ -79,14 +78,16 @@ namespace ECommerce.App.Controllers
         }
 
 
+        
         [HttpPost]
-        public IActionResult Authenticate([FromForm] AuthenticateUser authenticateUser)
+        
+        public IActionResult Authenticate([FromForm] AuthenticateUser user)
         {
 
-            bool isUserAuthenticated = _authService.AuthenticateUser(authenticateUser.UserName, authenticateUser.Password);
+            bool isUserAuthenticated = _authService.AuthenticateUser(user.UserName, user.Password);
             if (isUserAuthenticated)
             {
-                return View(authenticateUser);
+                return View(user);
             }
             else
             {

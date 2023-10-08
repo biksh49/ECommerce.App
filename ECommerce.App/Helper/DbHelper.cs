@@ -8,17 +8,17 @@ namespace ECommerce.App.Helper
 {
     public class DbHelper : IDbHelper
     {
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
 
-        public DbHelper(IUserService userService)
-        {
-            _userService = userService;
-        }
-        public bool InsertUser(tblUser user)
-        {
-            // Map tblUser properties to parameters and call the RegisterUser method
-            return _userService.RegisterUser(user.Name, user.Address, user.Email, user.Password, user.ContactNumber, user.Age, user.DOB);
-        }
+        //public DbHelper(IUserService userService)
+        //{
+        //    _userService = userService;
+        //}
+        //public bool InsertUser(tblUser user)
+        //{
+        //    // Map tblUser properties to parameters and call the RegisterUser method
+        //    return _userService.RegisterUser(user.Name, user.Address, user.Email, user.Password, user.ContactNumber, user.Age, user.DOB);
+        //}
         public bool DeletetblUserByID(int userID)
         {
             bool isDeleted = false;
