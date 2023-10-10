@@ -9,22 +9,20 @@ namespace ECommerce.App.Helper
     public class DbHelper : IDbHelper
     {
 
-         private readonly ConnectionStrings _dbContext;
+        private readonly ConnectionStrings _dbContext;
 
-            public DbHelper(ConnectionStrings dbContext)
-            {
-                _dbContext = dbContext;
-            }
+        public DbHelper(ConnectionStrings dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
-     
-
-        public bool DeletetblUserByID(int userID)
+        public bool DeleteUserByID(int userID)
         {
             bool isDeleted = false;
-            var sql = $"select * from tblUser where userID={userID}";
+            var sql = $"select * from tblUsers where userID={userID}";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                var user = connection.QueryFirstOrDefault<tblUser>(sql);
+                var user = connection.QueryFirstOrDefault<User>(sql);
                 isDeleted = user != null ? true : false;
 
                 return isDeleted;
@@ -32,30 +30,30 @@ namespace ECommerce.App.Helper
             }
         }
 
-        public List<tblUser> GetAlltblUsers()
+        public List<User> GetAllUsers()
         {
-            var sql = "select * from tblUser";
-            var users = new List<tblUser>();
+            var sql = "select * from tblUsers";
+            var users = new List<User>();
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                users = connection.Query<tblUser>(sql).ToList();
+                users = connection.Query<User>(sql).ToList();
                 return users;
 
             }
         }
 
-        public tblUser GettblUserByID(int userID)
+        public User GetUserByID(int userID)
         {
-            var sql = $"select * from tblUser where userID={userID}";
+            var sql = $"select * from tblUsers where userID={userID}";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                var user = connection.QueryFirstOrDefault<tblUser>(sql);
+                var user = connection.QueryFirstOrDefault<User>(sql);
                 return user;
 
             }
         }
 
-        public tblUser UpdatetblUserByID(tblUser user)
+        public User UpdateUserByID(User user)
         {
             return null;
             //var sql = $"select * from tblUsers where userID={userID}";
@@ -67,87 +65,45 @@ namespace ECommerce.App.Helper
             //}
         }
 
-
-
-        public IEnumerable<tblState> GettblStates()
+        public IEnumerable<State> GetStates()
         {
             var sql = "select * from tblState";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                var states = connection.Query<tblState>(sql);
+                var states = connection.Query<State>(sql);
                 return states;
 
             }
-        }
 
-        List<tblUser> IDbHelper.GetAlltblUsers()
-        {
-            throw new NotImplementedException();
         }
-
-        tblUser IDbHelper.UpdatetblUserByID(tblUser user)
+        public IEnumerable<District> GetDistricts()
         {
-            throw new NotImplementedException();
+            var sql = "select * from tblDistrict";
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+            {
+                var districts = connection.Query<District>(sql);
+                return districts;
+
+            }
+
         }
-
-        bool IDbHelper.DeletetblUserByID(int userID)
+        public IEnumerable<City> GetCities() 
         {
-            throw new NotImplementedException();
-        }
+            var sql = "select * from tblCity";
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+            {
+                var cities = connection.Query<City>(sql);
+                return cities;
 
-        tblUser IDbHelper.GettblUserByID(int userID)
-        {
-            throw new NotImplementedException();
-        }
+            }
 
-        bool IDbHelper.InsertUser(tblUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblState> IDbHelper.GetAlltblStates()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblDistrict> IDbHelper.GetAlltblDistricts()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblCity> IDbHelper.GetAlltblCities()
-        {
-            throw new NotImplementedException();
-        }
-
-        tblState IDbHelper.GettblStateById(int stateId)
-        {
-            throw new NotImplementedException();
-        }
-
-        tblDistrict IDbHelper.GettblDistrictById(int districtId)
-        {
-            throw new NotImplementedException();
-        }
-
-        tblCity IDbHelper.GettblCityById(int cityId)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblUser> IDbHelper.GettblUsersInState(int stateId)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblUser> IDbHelper.GetUserstblInDistrict(int districtId)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<tblUser> IDbHelper.GetUserstblInCity(int cityId)
-        {
-            throw new NotImplementedException();
         }
     }
+
+
+
+
+
+
 }
+

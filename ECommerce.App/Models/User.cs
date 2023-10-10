@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.App.Models
 {
-    public class tblUser
+    public class User
     {
 
         public int ID { get; set; }
@@ -28,12 +28,6 @@ namespace ECommerce.App.Models
         public int? StateID { get; set; }
         public int? DistrictID { get; set; }
         public int? CityID { get; set; }
-
-        // Navigation properties for relationships with State, District, and City entities
-        public tblState State { get; set; }
-        public tblDistrict District { get; set; }
-        public tblCity City { get; set; }
-        //If your application does not require accessing related entities from a tblUser object directly, you may omit the navigation properties to simplify the class
 
     }
 }

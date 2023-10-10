@@ -2,8 +2,8 @@
 
 public interface IUserService
 {
-    
-    public  void CreateUser(tblUser user);
+    public User GetUserByID(int id);
+    public  void CreateUser(User user);
 
 
 

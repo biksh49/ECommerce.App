@@ -9,9 +9,13 @@
         }
     };
     function attachHandler() {
-        $('body').on('click', '#SignIn', function () {
+        $('body').on('click', '#linkSignIn', function () {
             console.log("Here");
             authentication.authenticateUser();
+        });
+        $('body').on('click', '#lnkSignUp', function () {
+            //console.log("Here");
+            registerUser();
         });
 
     }

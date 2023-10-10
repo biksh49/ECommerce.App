@@ -1,186 +1,84 @@
-﻿
+﻿@model SignUpViewModel
 
-@{
-    ViewData["Title"] = "Sign Up";
-}
+<div class="card row">
 
-<div class="centered-form">
-    <h5>@ViewData["Title"]</h5>
-    <form id="signUpForm" method="post" action="/Account/Register">
-        <div class="form-group cubic-input">
-            <label for="Name">Name</label>
-            <input type="text" id="Name" name="Name" class="form-control" required maxlength="50" value="@Model.Name">
-        </div>
-        <div class="form-group cubic-input">
-            <label for="Age">Age</label>
-            <input type="number" id="Age" name="Age" class="form-control" min="0" value="@Model.Age">
-        </div>
+    <div class="card-header">
+       Register
+    </div>
+    <div class="card-body">
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Name</label>
+                <input type="text" class="form-control" id="inputName">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Age</label>
+                <input type="number" class="form-control" id="inputAge">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
 
-        <div class="form-group cubic-input">
-            <label for="Email">Email</label>
-            <input type="email" id="Email" name="Email" class="form-control" placeholder="name@gmail.com" required maxlength="50" value="@Model.Email">
-        </div>
+            <div class="col-md-2">
+                <label for="inputPostCode" class="form-label">PostCode</label>
+                <input type="text" class="form-control" id="inputPostCode">
+            </div>
 
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+           
+            
+            <div class="col-md-4">
+                <label for="inputCity" class="form-label">City</label>
+                
+                <select id="inputCity"class="form-select">
+                    <option selected>Choose...</option>
+                    @foreach(var district in Model.City)
+                    {
+                        <option itemid="@district.CityID">@district.CityName</option>
+                    }
+
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+              
+                <select id="inputState" class="form-select">
+                    <option selected>Choose...</option>
+                    @foreach (var state in Model.State)
+                    {
+                        <option itemid="@state.StateID">@state.StateName</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="inputDistrict" class="form-label">District</label>
+                
+                <select id="inputDistrict" class="form-select">
+                    <option selected>Choose...</option>
+                    @foreach (var state in Model.District)
+                    {
+                        <option itemid="@state.StateID">@state.DistrictName</option>
+                    }
+                </select>
+            </div>
+          
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Terms and Condition
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" id="lnkSignUp">Sign Up</button>
+            </div>
+        </form>
         
 
-        <div class="form-group cubic-input">
-            <label for="ContactNumber">Contact Number</label>
-            <input type="tel" id="ContactNumber" name="ContactNumber" class="form-control" pattern="[0-9]{10}" placeholder="10-digit number" value="@Model.ContactNumber">
-        </div>
-        <div class="form-group cubic-input">
-            <label for="PostCode">PostCode</label>
-            <input type="text" id="PostCode" name="PostCode" class="form-control" required maxlength="50" value="@Model.Address">
-        </div>
-
-        <div class="form-group cubic-input">
-            <label for="Password">Password</label>
-            <input type="password" id="Password" name="Password" class="form-control" required maxlength="50">
-        </div>
-
-        <div class="form-group cubic-input">
-            <label for="DOB">Date of Birth</label>
-            <input type="date" id="DOB" name="DOB" class="form-control" placeholder="YYYY-MM-DD" required pattern="\d{4}-\d{2}-\d{2}" value="@Model.DOB.ToString("yyyy-MM-dd")">
-        </div>
-        <div class="form-group cubic-input">
-            <label for="SelectedStateID">State</label>
-            <select id="SelectedStateID" name="SelectedStateID" class="form-control" required>
-                <option value="">Select State</option>
-                @foreach (var state in Model.States)
-                {
-                    <option value="@state.Id">@state.Name</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group cubic-input">
-            <label for="SelectedDistrictID">District</label>
-            <select id="SelectedDistrictID" name="SelectedDistrictID" class="form-control" required>
-                <option value="">Select District</option>
-                @foreach (var district in Model.Districts)
-                {
-                    <option value="@district.Id">@district.Name</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group cubic-input">
-            <label for="SelectedCityID">City</label>
-            <select id="SelectedCityID" name="SelectedCityID" class="form-control" required>
-                <option value="">Select City</option>
-                @foreach (var city in Model.Cities)
-                {
-                    <option value="@city.Id">@city.Name</option>
-                }
-            </select>
-
-        </div>
-
-
-
-        <button type="submit" id="lnkSignUp" class="btn btn-primary cubic-button">Sign Up</button>
-    </form>
+    </div>
 </div>
-
-       
-
-
-
-
-
-
-
-<style>
-    /* CSS for cubic-shaped form elements */
-    .centered-form h5 {
-        text-align: center;
-    }
-
-    .btn-primary:hover {
-        color: yellow;
-        cursor: pointer;
-    }
-
-    .btn-primary:hover {
-        background-color: yellow;
-        color: black;
-    }
-
-    .cubic-input {
-        border: none;
-        border-bottom: 2px solid #3498db;
-        padding: 15px; /* Increase the padding to make the input fields larger */
-        margin-bottom: 20px;
-        transition: border-color 0.3s;
-    }
-
-    .centered-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 400px; /* Set the maximum width for the form container */
-        margin: 0 auto; /* Center the container horizontally */
-        background-color: #f7f7f7;
-        padding: 25px;
-        border: 1px solid #ccc; /* Add a border around the form container */
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .cubic-input:focus {
-        outline: none; /* Remove outline on focus */
-        border-color: #e74c3c; /* Change border color on focus */
-    }
-
-    .forgot-password-link {
-        color: #3498db; /* Change link color */
-        text-decoration: none; /* Remove underline */
-        font-weight: bold; /* Add emphasis */
-    }
-
-    .cubic-button {
-        border: none; /* Remove borders */
-        border-radius: 25px; /* Add rounded corners */
-        padding: 12px 30px; /* Adjust padding for the button */
-        background-color: #3498db; /* Change button background color */
-        color: #fff; /* Change button text color */
-        transition: background-color 0.3s; /* Add a smooth transition for the background color */
-    }
-
-
-
-    centered-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 400px; /* Set the maximum width for the form container */
-        margin: 0 auto; /* Center the container horizontally */
-        background-color: #f7f7f7;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-
-
-
-    .form-control {
-        display: block;
-        width: 100%;
-        padding: .5rem .9rem;
-        font-size: 1rem;
-        font-weight: bold;
-        line-height: 1.5;
-        color: #212529;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: .25rem;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    }
-</style>

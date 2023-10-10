@@ -3,9 +3,9 @@ using ECommerce.App.Helper;
 using ECommerce.App.Models;
 using System.Data.SqlClient;
 
-public class RegistrationUser : IUserService
+public class UserService : IUserService
 {
-    public void CreateUser(tblUser user)
+    public void CreateUser(User user)
     {
        
         
@@ -19,5 +19,8 @@ public class RegistrationUser : IUserService
         
     }
 
-  
+    public User GetUserByID(int id)
+    {
+        throw new NotImplementedException();
+    }
 }
