@@ -1,0 +1,22 @@
+﻿@{
+    string userName = string.Empty;
+}
+@{
+    var value = ((System.Security.Claims.ClaimsIdentity)User.Identity)?.FindFirst("UserName")?.Value;
+    
+    userName = value;
+}
+
+<ul class="navbar-nav">
+@if (!string.IsNullOrEmpty(userName))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @userName!</a>
+    </li>
+    <li class="nav-item">
+        <a  class="nav-link text-dark" href=@Url.Action("SignOut","Account")>Logout</a>
+        
+    </li>
+}
+
+</ul>

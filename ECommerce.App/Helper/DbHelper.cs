@@ -74,6 +74,17 @@ namespace ECommerce.App.Helper
             }
 
         }
+        public IEnumerable<District> GetDistricts()
+        {
+            var sql = "select * from tblDistrict";
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+            {
+                var districts = connection.Query<District>(sql);
+                return districts;
+
+            }
+
+        }
     } 
 }
 

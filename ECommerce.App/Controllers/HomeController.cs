@@ -8,6 +8,7 @@ using ECommerce.App.Helper;
 using ECommerce.App.Service;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ECommerce.App.Controllers
 {
@@ -35,6 +36,10 @@ namespace ECommerce.App.Controllers
 
         public IActionResult Index()
         {
+            StreamReader sr = new StreamReader("products.json");
+            string products = sr.ReadToEnd();
+            sr.Close();
+            List<ProductViewModel> databaseUser = JsonConvert.DeserializeObject<List<ProductViewModel>>(products);
             return PartialView();
         }
 
@@ -67,7 +72,7 @@ namespace ECommerce.App.Controllers
         //    {
         //        return View("Unauthorized");
         //    }
-           
+
         //}
         /// <summary>
         /// Authenticate the user from JSON File
@@ -84,8 +89,8 @@ namespace ECommerce.App.Controllers
         //    //sw.WriteLine("Hi Everyone!!!");
         //    //sw.Close();
 
-        //    StreamReader sr = new StreamReader("user.json");
-        //    string lines = sr.ReadToEnd();
+        //StreamReader sr = new StreamReader("products.json");
+        //string lines = sr.ReadToEnd();
         //    sr.Close();
 
 
@@ -102,7 +107,8 @@ namespace ECommerce.App.Controllers
         //    //// Read the JSON file into a string
         //    //string jsonString =File.ReadAllText(filePath);
         //    //// Deserialize the JSON string into an object
-        //    //List<AuthenticateUser> databaseUser = JsonSerializer.Deserialize<List<AuthenticateUser>>(jsonString);
+        //List<ProductViewModel> databaseUser = JsonSerializer.Deserialize<List<ProductViewModel>>(lines);
+        //ReturnTypeEncoder View(databaseUser);
 
 
         //    List<AuthenticateUser> databaseUser= JsonConvert.DeserializeObject<List<AuthenticateUser>>(lines);

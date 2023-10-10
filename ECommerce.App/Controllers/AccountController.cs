@@ -32,34 +32,43 @@ namespace ECommerce.App.Controllers
         }
         public IActionResult SignUp()
         {
-            //var states=_dbHelper.GetStates();
+            SignUpViewModel signUpViewModel = new SignUpViewModel();
+            
+            var states=_dbHelper.GetStates();
+            var districts=_dbHelper.GetDistricts();
+
+            signUpViewModel.State =states;
+            signUpViewModel.District =districts;
             ViewBag.States=_dbHelper.GetStates();
-            return View();
+            return View(signUpViewModel);
         }
         [AllowAnonymous]
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
             var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
-            var userClaims = new List<Claim>()
+           
+            if (userDetails!=null)
+            {
+
+                var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Role, "user"),
-                    new Claim("UserName",$"Biki Shah"),
-                    new Claim("UserId",$"145"),
-                    new Claim("Email",$"biksh49@gmail.com")
+                    new Claim("UserName",$"{userDetails.Name}"),
+                    new Claim("UserId",$"{userDetails.ID}"),
+                    new Claim("Email",$"{userDetails.Email}")
 
                 };
-            var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principles = new ClaimsPrincipal();
-            principles.AddIdentity(id);
-            HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
-            {
-                ExpiresUtc = DateTime.UtcNow.AddHours(8),
-                IsPersistent = true,
-                AllowRefresh = false,
-            });
-            if (userDetails)
-            {
+                var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principles = new ClaimsPrincipal();
+                principles.AddIdentity(id);
+                HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
+                {
+                    ExpiresUtc = DateTime.UtcNow.AddHours(8),
+                    IsPersistent = true,
+                    AllowRefresh = false,
+                });
+
                 return RedirectToAction("Index", "Home");
             }
             else
