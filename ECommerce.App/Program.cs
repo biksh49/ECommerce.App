@@ -1,4 +1,5 @@
 using ECommerce.App.Helper;
+using ECommerce.App.Models;
 using ECommerce.App.Service;
 
 internal class Program
@@ -8,9 +9,16 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        var db = builder.Configuration.GetSection("ConnectionStrings:DefaultConnection");
+        var dbContext = builder.Configuration.GetSection(nameof(ConnectionStrings)).Get<ConnectionStrings>();
+        builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection"));
+       
+        builder.Services.AddSingleton(dbContext);
+        builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IDbHelper, DbHelper>();
         builder.Services.AddTransient<IAuthService, AuthService>();
-        //builder.Services.AddTransient<IUserService,RegistrationUser>();
+        builder.Services.AddTransient<IUserService,RegistrationUser>();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();

@@ -9,9 +9,13 @@ namespace ECommerce.App.Service
 {
     public class AuthService : IAuthService
     {
-        public AuthService()
+        private readonly ConnectionStrings _dbContext;
+
+        public AuthService(ConnectionStrings dbContext)
         {
+            _dbContext = dbContext;
         }
+
 
         public bool AuthenticateUser(string email, string password)
         {

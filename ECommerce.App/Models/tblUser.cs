@@ -5,33 +5,35 @@ namespace ECommerce.App.Models
 {
     public class tblUser
     {
-        
 
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        //[Required(ErrorMessage = "Name is required.")]
-        //[StringLength(50, ErrorMessage = "Name cannot exceed 50 characters.")]
+      
         public string Name { get; set; }
-
-        //[Required(ErrorMessage = "Address is required.")]
-        //[StringLength(50, ErrorMessage = "Address cannot exceed 50 characters.")]
-        public string Address { get; set; }
-
-        //[Required(ErrorMessage = "Email is required.")]
-        //[StringLength(50, ErrorMessage = "Email cannot exceed 50 characters.")]
-        //[EmailAddress(ErrorMessage = "Invalid email format.")]
-        public string Email { get; set; }
-
-        //[Required(ErrorMessage = "Password is required.")]
-        //[StringLength(50, ErrorMessage = "Password cannot exceed 50 characters.")]
-        public string Password { get; set; }
-
-        public string? ContactNumber { get; set; }
 
         public int? Age { get; set; }
 
-        //[Required(ErrorMessage = "Date of Birth is required.")]
-        //[StringLength(50, ErrorMessage = "Date of Birth cannot exceed 50 characters.")]
-        public string DOB { get; set; }
+   
+        public string Email { get; set; }
+
+     
+        public string ContactNumber { get; set; }
+
+       
+        public string PostCode { get; set; }
+
+       
+        public string Password { get; set; }
+
+        public int? StateID { get; set; }
+        public int? DistrictID { get; set; }
+        public int? CityID { get; set; }
+
+        // Navigation properties for relationships with State, District, and City entities
+        public tblState State { get; set; }
+        public tblDistrict District { get; set; }
+        public tblCity City { get; set; }
+        //If your application does not require accessing related entities from a tblUser object directly, you may omit the navigation properties to simplify the class
+
     }
 }

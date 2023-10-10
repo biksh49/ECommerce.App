@@ -8,22 +8,21 @@ namespace ECommerce.App.Helper
 {
     public class DbHelper : IDbHelper
     {
-        //private readonly IUserService _userService;
 
-        //public DbHelper(IUserService userService)
-        //{
-        //    _userService = userService;
-        //}
-        //public bool InsertUser(tblUser user)
-        //{
-        //    // Map tblUser properties to parameters and call the RegisterUser method
-        //    return _userService.RegisterUser(user.Name, user.Address, user.Email, user.Password, user.ContactNumber, user.Age, user.DOB);
-        //}
+         private readonly ConnectionStrings _dbContext;
+
+            public DbHelper(ConnectionStrings dbContext)
+            {
+                _dbContext = dbContext;
+            }
+
+     
+
         public bool DeletetblUserByID(int userID)
         {
             bool isDeleted = false;
             var sql = $"select * from tblUser where userID={userID}";
-            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var user = connection.QueryFirstOrDefault<tblUser>(sql);
                 isDeleted = user != null ? true : false;
@@ -37,7 +36,7 @@ namespace ECommerce.App.Helper
         {
             var sql = "select * from tblUser";
             var users = new List<tblUser>();
-            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 users = connection.Query<tblUser>(sql).ToList();
                 return users;
@@ -48,7 +47,7 @@ namespace ECommerce.App.Helper
         public tblUser GettblUserByID(int userID)
         {
             var sql = $"select * from tblUser where userID={userID}";
-            using (var connection = new SqlConnection("Server=desktop-33ojo2e\\sqlexpress;Database=dbECommerce;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"))
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
                 var user = connection.QueryFirstOrDefault<tblUser>(sql);
                 return user;
@@ -66,6 +65,89 @@ namespace ECommerce.App.Helper
             //    return user;
 
             //}
+        }
+
+
+
+        public IEnumerable<tblState> GettblStates()
+        {
+            var sql = "select * from tblState";
+            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+            {
+                var states = connection.Query<tblState>(sql);
+                return states;
+
+            }
+        }
+
+        List<tblUser> IDbHelper.GetAlltblUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        tblUser IDbHelper.UpdatetblUserByID(tblUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDbHelper.DeletetblUserByID(int userID)
+        {
+            throw new NotImplementedException();
+        }
+
+        tblUser IDbHelper.GettblUserByID(int userID)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDbHelper.InsertUser(tblUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblState> IDbHelper.GetAlltblStates()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblDistrict> IDbHelper.GetAlltblDistricts()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblCity> IDbHelper.GetAlltblCities()
+        {
+            throw new NotImplementedException();
+        }
+
+        tblState IDbHelper.GettblStateById(int stateId)
+        {
+            throw new NotImplementedException();
+        }
+
+        tblDistrict IDbHelper.GettblDistrictById(int districtId)
+        {
+            throw new NotImplementedException();
+        }
+
+        tblCity IDbHelper.GettblCityById(int cityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblUser> IDbHelper.GettblUsersInState(int stateId)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblUser> IDbHelper.GetUserstblInDistrict(int districtId)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<tblUser> IDbHelper.GetUserstblInCity(int cityId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

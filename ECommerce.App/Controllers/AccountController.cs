@@ -16,14 +16,14 @@ namespace ECommerce.App.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IDbHelper _dbHelper;
         private readonly IAuthService _authService;
-        
-       // private readonly IUserService _userService;
-        public AccountController(ILogger<HomeController> logger, IDbHelper dbHelper, IAuthService authService)
+
+        private readonly IUserService _userService;
+        public AccountController(ILogger<HomeController> logger, IDbHelper dbHelper, IAuthService authService, IUserService userService)
         {
             _logger = logger;
             _dbHelper = dbHelper;
             _authService = authService;
-          //  _userService = userService;
+            _userService = userService;
         }
         public IActionResult Index()
         {
@@ -31,45 +31,15 @@ namespace ECommerce.App.Controllers
         }
         public IActionResult SignIn()
         {
+            //  ViewBag.States = _dbHelper.GetStates();
             return View();
+
         }
         public IActionResult SignUp()
         {
             return View();
         }
-        [HttpPost]
-        //public IActionResult Register(RegisterUser registerUser)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var newUser = new tblUser
-        //        {
-        //            Name = registerUser.Name,
-        //            Address = registerUser.Address,
-        //            Email = registerUser.Email,
-        //            Password = registerUser.Password,
-        //            ContactNumber = registerUser.ContactNumber,
-        //            Age = registerUser.Age,
-        //            DOB = registerUser.DOB
-        //        };
 
-        //        bool isRegistered = _userService.RegisterUser(newUser);
-
-        //        if (isRegistered)
-        //        {
-        //            // Redirect to a success page, login page, or other appropriate action
-        //            return RedirectToAction("SignIn");
-        //        }
-        //        else
-        //        {
-        //            // Handle the case where registration failed (e.g., display an error message)
-        //            ModelState.AddModelError(string.Empty, "Registration failed. Please try again.");
-        //        }
-        //    }
-
-        //    // If the model state is not valid, return to the sign-up view with validation errors
-        //    return View(registerUser);
-        //}
 
 
         public IActionResult ForgetPassword()
@@ -78,26 +48,83 @@ namespace ECommerce.App.Controllers
         }
 
 
-        
+
         [HttpPost]
-        
+
         public IActionResult Authenticate([FromForm] AuthenticateUser user)
         {
 
-            bool isUserAuthenticated = _authService.AuthenticateUser(user.UserName, user.Password);
-            if (isUserAuthenticated)
+            var userDetails = _authService.AuthenticateUser(user.UserName, user.Password);
+            if (userDetails)
             {
-                return View(user);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View("Unauthorized");
+                //return RedirectToAction("Index", "Home");
+                return PartialView("UnAuthorized");
             }
 
         }
-       
+        // GET: /Account/Register
+        //public IActionResult Register()
+        //{
+        //    var viewModel = new SignUpViewModel();
+        //    // You can populate dropdown lists or other properties of viewModel if needed.
+        //    return View(viewModel);
+        //}
+
+
+        // POST: /Account/Register
+        //[HttpPost]        
+        //public IActionResult Register([FromBody] SignUpViewModel user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            // Map the SignUpViewModel to a tblUser object
+        //            var tblUser = new tblUser
+        //            {
+        //                Name = user.Name,
+        //                Age = user.Age,
+        //                Email = user.Email,
+        //                ContactNumber = user.ContactNumber,
+        //                PostCode = user.Postcode,
+        //                Password = user.Password,
+        //                StateID = user.SelectedStateID,
+        //                DistrictID = user.SelectedDistrictID,
+        //                CityID = user.SelectedCityID
+        //            };
+
+        //            // Call the UserService to create the user
+        //            _userService.CreateUser(tblUser);
+
+        //            // Redirect to a success page or login page
+        //            return RedirectToAction("Login", "Account");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Log the exception or handle it as needed
+        //            ModelState.AddModelError(string.Empty, "An error occurred while registering. Please try again later.");
+        //        }
+        //    }
+
+        //    // If ModelState is not valid, return the registration form with validation errors
+        //    return View(user);
+
+        //}
+
+
+        [HttpPost]
+        public void RegisterUser([FromBody] tblUser user)
+        {
+            _userService.CreateUser(user);
+            //var userDetails = _userService.GetUserByID(userID);
+
+        }
+
+
 
     }
-       
-    
 }

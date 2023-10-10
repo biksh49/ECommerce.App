@@ -1,7 +1,10 @@
-﻿namespace ECommerce.App.Service
+﻿using ECommerce.App.Models;
+
+public interface IUserService
 {
-    public class IUserService
-    {
-       
-    }
+    
+    public  void CreateUser(tblUser user);
+
+
+
 }
