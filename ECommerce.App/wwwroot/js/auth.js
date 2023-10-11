@@ -18,7 +18,20 @@ var authentication = (function () {
             //console.log("Here");
             registerUser();
         });
+        $('body').on('change', '#inputState', function () {
+            //console.log("Here");
+            var selectedState = $('#inputState').val();
+            getDistrictByStateID(selectedState);
+
+        });
         
+    }
+    function getDistrictByStateID(stateID) {
+
+        helper.makeRequest("/Account/GetDistrictByID?id="+stateID+"", "get", "application/json", data, function (response) {
+            //window.location.reload();
+            $("#content-wrapper").html(response);
+        });
     }
     function authenticateUser() {
         var email = $("#exampleFormControlInput1").val();

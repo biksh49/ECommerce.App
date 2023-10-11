@@ -39,7 +39,7 @@ namespace ECommerce.App.Controllers
 
             signUpViewModel.State =states;
             signUpViewModel.District =districts;
-            ViewBag.States=_dbHelper.GetStates();
+            //ViewBag.States=_dbHelper.GetStates();
             return View(signUpViewModel);
         }
         [AllowAnonymous]

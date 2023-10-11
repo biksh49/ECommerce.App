@@ -1,6 +1,7 @@
 using System.Globalization;
 using ECommerce.App.Helper;
 using ECommerce.App.Models;
+using ECommerce.App.Repository;
 using ECommerce.App.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -38,6 +39,7 @@ builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddTransient<IDbHelper,DbHelper>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 
 
