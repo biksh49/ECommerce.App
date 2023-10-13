@@ -15,17 +15,18 @@ namespace ECommerce.App.Controllers
     public class AccountController : Controller
     {
        
-        private readonly IDbHelper _dbHelper;
+       
         private readonly IAuthService _authService;
+        private readonly IDbHelper _dbHelper;
         private readonly IUserService _userService;
 
 
 
-        public AccountController( IDbHelper dbHelper, IAuthService authService,IUserService userService)
+        public AccountController(  IAuthService authService, IDbHelper dbHelper, IUserService userService)
         {
-            
-            _dbHelper = dbHelper;
             _authService = authService;
+            _dbHelper = dbHelper;
+           
             _userService = userService;
         
         }
