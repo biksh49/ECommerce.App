@@ -14,7 +14,7 @@
             authentication.authenticateUser();
         });
         $('body').on('click', '#lnkSignUp', function () {
-            //console.log("Here");
+            console.log("Here");
             registerUser();
         });
 
@@ -39,7 +39,10 @@
         var age = $("#Age").val();
         var postCode = $("#PostCode").val(); // Get the PostCode value
 
-        var userData = {
+
+
+          // Construct user data object
+        var  registerUser = {
             Name: name,
             Address: address,
             Email: email,
@@ -53,11 +56,11 @@
         };
 
         // Convert the user data to JSON
-        var jsonData = JSON.stringify(userData);
+        const data = JSON.stringify(registerUser);
 
         // Make an AJAX request to the server to register the user
         // Assuming you have a helper function for making AJAX requests
-        helper.makeRequest("/Account/Register", "post", "application/json", jsonData, function (response) {
+        helper.makeRequest("/Account/RegisterUser", "post", "application/json", data, function (response) {
             // Handle the response or perform any necessary actions after registration
 
             //window.location.reload();

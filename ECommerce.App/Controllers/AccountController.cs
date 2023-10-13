@@ -6,6 +6,7 @@ using System.IO;
 using ECommerce.App.Helper;
 using ECommerce.App.Service;
 using ECommerce.App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.App.Controllers
 {
@@ -60,7 +61,7 @@ namespace ECommerce.App.Controllers
         }
 
 
-        
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Authenticate([FromForm] AuthenticateUser user)
         {
