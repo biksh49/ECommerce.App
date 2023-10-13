@@ -11,7 +11,7 @@ namespace ECommerce.App.Service
 	public class AuthService:IAuthService
 	{
         private readonly ConnectionStrings _dbContext;
-
+       
         public AuthService(ConnectionStrings dbContext)
 		{
             _dbContext = dbContext;

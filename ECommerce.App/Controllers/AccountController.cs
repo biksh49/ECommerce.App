@@ -46,6 +46,10 @@ namespace ECommerce.App.Controllers
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
+            if(!ModelState.IsValid)
+            {
+
+            }
             var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
            
             if (userDetails!=null)

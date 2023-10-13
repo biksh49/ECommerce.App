@@ -40,7 +40,7 @@ namespace ECommerce.App.Controllers
             string products = sr.ReadToEnd();
             sr.Close();
             List<ProductViewModel> databaseUser = JsonConvert.DeserializeObject<List<ProductViewModel>>(products);
-            return PartialView();
+            return PartialView(databaseUser);
         }
 
         public IActionResult Privacy()
