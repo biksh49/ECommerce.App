@@ -19,7 +19,7 @@
     function authenticateUser() {
         var email = $("#Email").val();
         var password = $("#Password").val();
-        const authenticateUser = { username: email, password: password };
+        const authenticateUser = { email: email, password: password };
         const data = JSON.stringify(authenticateUser);
         helper.makeRequest("/Account/Authenticate", "post", "application/json", data, function (response) {
             //window.location.reload();
