@@ -14,21 +14,21 @@ var authentication = (function () {
             console.log("Here");
             authentication.authenticateUser();
         });
-        $('body').on('click', '#lnkSignUp', function () {
+        $('body').on('click', '#lnkSignUp', function (e) {
             //console.log("Here");
-            registerUser();
+            registerUser(e);
         });
         $('body').on('change', '#inputState', function () {
             //console.log("Here");
-            var selectedState = $('#inputState').val();
+            var selectedState = $('select#inputState option:selected').attr('itemid');
             getDistrictByStateID(selectedState);
 
         });
         
     }
     function getDistrictByStateID(stateID) {
-
-        helper.makeRequest("/Account/GetDistrictByID?id="+stateID+"", "get", "application/json", data, function (response) {
+        
+        helper.makeRequest("/Account/GetDistrictByStateID?id="+stateID+"", "get", "application/json",  null, function (response) {
             //window.location.reload();
             $("#content-wrapper").html(response);
         });
@@ -43,7 +43,7 @@ var authentication = (function () {
              $("#content-wrapper").html(response);
         });
     } 
-    function registerUser() {
+    function registerUser(e) {
         var email = $("#inputEmail4").val();
         var password = $("#inputPassword4").val();
         var address = $("#inputAddress").val();
@@ -51,8 +51,10 @@ var authentication = (function () {
         var state = $("#inputState").val();
         var name = $("#inputName").val();
         var age = $("#inputAge").val();
+        var stateID = $('select#inputState option:selected').attr('itemid');
+        
         //var password = $("#exampleFormControlInput2").val();
-        const registerUser = { email: email, password: password,address:address,state:state,name:name,age:age };
+        const registerUser = { email: email, password: password,address:address,stateID:stateID,name:name,age:age };
         const data = JSON.stringify(registerUser);
         helper.makeRequest("/Account/RegisterUser", "post", "application/json", data, function (response) {
             //window.location.reload();

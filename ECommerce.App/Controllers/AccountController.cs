@@ -43,12 +43,13 @@ namespace ECommerce.App.Controllers
             return View(signUpViewModel);
         }
         [AllowAnonymous]
+        
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
             if(!ModelState.IsValid)
             {
-
+                return BadRequest("Please fill up the required field!");
             }
             var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
            
@@ -88,6 +89,11 @@ namespace ECommerce.App.Controllers
             _userService.CreateUser(user);
             //var userDetails = _userService.GetUserByID(userID);
 
+        }
+        public List<District> GetDistrictByStateID([FromQuery]int stateID)
+        {
+            var districts = _dbHelper.GetDistrictByStateID(stateID);
+            return districts.ToList();
         }
     }
 }

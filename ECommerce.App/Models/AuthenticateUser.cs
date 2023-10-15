@@ -7,6 +7,8 @@ namespace ECommerce.App.Models
         [Required]
         [StringLength(50,ErrorMessage ="The Email length can be more than 50",MinimumLength=10)]
         public string Email { get; set; }
+
+        [Required]
         public string Password { get; set; }
     }
    
