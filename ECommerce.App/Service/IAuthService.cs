@@ -6,6 +6,6 @@ namespace ECommerce.App.Service
 {
     public interface IAuthService
     {
-        public User AuthenticateUser(string email, string password);
+        public bool AuthenticateUser(string email, string password);
     }
 }

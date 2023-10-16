@@ -5,25 +5,13 @@ namespace ECommerce.App.Helper
 {
     public interface IDbHelper
     {
-
-        public List<User> GetAllUsers();
-        public User UpdateUserByID(User user);
-        public bool DeleteUserByID(int userID);
-        public User GetUserByID(int userID);
+        //here operation is done for all Users to retrive the data from database
         public IEnumerable<State> GetStates();
-        public IEnumerable<District> GetDistricts();
         public IEnumerable<City> GetCities();
+        public IEnumerable<District> GetDistricts();
+        public IEnumerable<District> GetDistrictByStateID(int StateID);
+        public IEnumerable<City> GetCityByDistricID(int DistrictID);
 
-        //// Additional methods for working with tblState, tblDistrict, and tblCity
-
-        //// Retrieve all states
-        //public IEnumerable<State> GetAllStates();
-
-        //// Retrieve all districts
-        //public IEnumerable<District> GetAllDistricts();
-
-        //// Retrieve all cities
-        //public IEnumerable<City> GetAllCities();
 
 
     }

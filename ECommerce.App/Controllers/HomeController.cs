@@ -36,7 +36,7 @@ namespace ECommerce.App.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return   PartialView();
         }
 
        

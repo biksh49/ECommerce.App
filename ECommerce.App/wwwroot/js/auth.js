@@ -10,12 +10,40 @@
             console.log("Here");
             authenticateUser();
         });
-        $('body').on('click', '#lnkSignUp', function () {
+        $('body').on('click', '#lnkSignUp', function (e) {
             console.log("Here");
-            registerUser();
+            registerUser(e);
         });
     }
 
+    $('body').on('change', '#inputState', function () {
+        //console.log("Here");
+        var selectedState = $('select#inputState option:selected').attr('itemid');
+        getDistrictByStateID(selectedState);
+
+    });
+    $('body').on('change', '#inputDistrict', function () {
+        //console.log("Here");
+        var selectedDistrict = $('select#inputState option:selected').attr('itemid');
+        getCityByDistrictID(selectedDistrict);
+
+    });
+
+    function getDistrictByStateID(StateID) {
+
+        helper.makeRequest("/Account/GetDistrictByStateID?id=" + StateID + "", "get", "application/json", null, function (response) {
+            //window.location.reload();
+            $("#content-wrapper").html(response);
+        });
+    }
+
+    function getCityByDistrictID(DistrictID) {
+
+        helper.makeRequest("/Account/GetCityByDistrictID?id=" + DistrictID + "", "get", "application/json", null, function (response) {
+            //window.location.reload();
+            $("#content-wrapper").html(response);
+        });
+    }
     function authenticateUser() {
         var email = $("#Email").val();
         var password = $("#Password").val();
@@ -29,24 +57,27 @@
 
     function registerUser() {
         var name = $("#Name").val();
-        var address = $("#Address").val();
-        var email = $("#Email").val();
-        var password = $("#Password").val();
-        var contactNumber = $("#ContactNumber").val();
         var age = $("#Age").val();
+        var email = $("#Email").val();
+       
+        var contactNumber = $("#ContactNumber").val();
+        var password = $("#Password").val();
+     
         var postCode = $("#PostCode").val();
+        var stateID = $("#inputState").val();
+        var districtID = $("#inputDistrict").val();
+        var cityID = $("#inputCity").val();
 
         var registerUser = {
             Name: name,
-            Address: address,
-            Email: email,
-            Password: password,
-            ContactNumber: contactNumber,
             Age: age,
+            Email: email,
+            ContactNumber: contactNumber,
             PostCode: postCode,
-            StateID: null,
-            DistrictID: null,
-            CityID: null
+            Password: password,
+            StateID: stateID,
+            DistrictID: districtID,
+            CityID: cityID
         };
 
         const data = JSON.stringify(registerUser);
