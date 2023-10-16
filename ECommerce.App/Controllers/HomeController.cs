@@ -34,13 +34,18 @@ namespace ECommerce.App.Controllers
             _conn = conn;
         }
 
+
         public IActionResult Index()
         {
-            return   PartialView();
+            StreamReader sr = new StreamReader("products.json");
+            string products = sr.ReadToEnd();
+            sr.Close();
+            List<ProductViewModel> databaseUser = JsonConvert.DeserializeObject<List<ProductViewModel>>(products);
+            return PartialView(databaseUser);
         }
 
-       
-       
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
