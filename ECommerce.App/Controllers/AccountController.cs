@@ -42,6 +42,11 @@ namespace ECommerce.App.Controllers
             //ViewBag.States=_dbHelper.GetStates();
             return View(signUpViewModel);
         }
+        public IActionResult LogOut()
+        {
+            return null;
+        }
+
         [AllowAnonymous]
         
         [HttpPost]
@@ -73,7 +78,6 @@ namespace ECommerce.App.Controllers
                     IsPersistent = true,
                     AllowRefresh = false,
                 });
-
                 return RedirectToAction("Index", "Home");
             }
             else

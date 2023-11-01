@@ -22,8 +22,9 @@ namespace ECommerce.App.Controllers
         private readonly IConfiguration _configuration;
         private readonly ConnectionStrings _dbContext;
         private readonly ConnectionStrings _conn;
+        private readonly IProductService _productService;
 
-        public HomeController(ConnectionStrings dbContexts,ILogger<HomeController> logger,IDbHelper dbHelper,IAuthService authService,IConfiguration configuration,IOptions<ConnectionStrings> dbContext,ConnectionStrings conn)
+        public HomeController(ConnectionStrings dbContexts,ILogger<HomeController> logger,IDbHelper dbHelper,IAuthService authService,IConfiguration configuration,IOptions<ConnectionStrings> dbContext,ConnectionStrings conn,IProductService productService)
         {
             _dbContexts = dbContexts;
             _logger = logger;
@@ -32,6 +33,7 @@ namespace ECommerce.App.Controllers
             _configuration = configuration;
             _dbContext = dbContext.Value;
             _conn = conn;
+            _productService = productService;
         }
 
         public IActionResult Index()
@@ -40,7 +42,7 @@ namespace ECommerce.App.Controllers
             string products = sr.ReadToEnd();
             sr.Close();
             List<ProductViewModel> databaseUser = JsonConvert.DeserializeObject<List<ProductViewModel>>(products);
-            return PartialView(databaseUser);
+            return View(databaseUser);
         }
 
         public IActionResult Privacy()
@@ -136,6 +138,19 @@ namespace ECommerce.App.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult GetProductByID(int id)
+        {
+            try
+            {
+                var productDetails=_productService.GetProductByID(id);
+                return PartialView(productDetails);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

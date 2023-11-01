@@ -14,6 +14,10 @@ var authentication = (function () {
             console.log("Here");
             authentication.authenticateUser();
         });
+        $('body').on('click', '#lnkProductDescription', function (e) {
+            var productID = e.currentTarget.getAttribute("data-id");
+            getProductByID(productID);
+        });
         $('body').on('click', '#lnkSignUp', function (e) {
             //console.log("Here");
             registerUser(e);
@@ -25,6 +29,13 @@ var authentication = (function () {
 
         });
         
+    }
+    function getProductByID(productID) {
+     
+        helper.makeRequest(constant.APP_GET_PRODUCT_BY_ID+"?id="+productID+"", "get", "application/json", null, function (response) {
+           
+            $("#content-wrapper").html(response);
+        });
     }
     function getDistrictByStateID(stateID) {
         
@@ -38,9 +49,10 @@ var authentication = (function () {
         var password = $("#exampleFormControlInput2").val();
         const authenticateUser = { email: email, password: password };
         const data = JSON.stringify(authenticateUser);
-        helper.makeRequest("/Account/AuthenticateUser", "post", "application/json", data, function (response) {
-            //window.location.reload();
-             $("#content-wrapper").html(response);
+        helper.makeRequest(constant.APP_AUTHENTICATE_USER, "post", "application/json", data, function (response) {
+           
+            $("#content-wrapper").html(response);
+             //window.location.reload(true);
         });
     } 
     function registerUser(e) {

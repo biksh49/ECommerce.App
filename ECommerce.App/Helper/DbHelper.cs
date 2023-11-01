@@ -13,21 +13,24 @@ namespace ECommerce.App.Helper
         {
             _dbContext = dbContext;
         }
-
-        
-        
-
-        
-      
         public IEnumerable<State> GetStates()
         {
-            var sql = "select * from tblState";
-            using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+            try
             {
-                var states = connection.Query<State>(sql);
-                return states;
+                var sql = "select * from tblState";
+                using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
+                {
+                    var states = connection.Query<State>(sql);
+                    return states;
 
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
 
         }
         public IEnumerable<District> GetDistricts()

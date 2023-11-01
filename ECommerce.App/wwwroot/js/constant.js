@@ -1,6 +1,5 @@
-﻿//var constant = (function () {
-//APP_AUTHENTICATE_USER = "/Home/Authenticate"
-        
-   
-
-//})();
+﻿var BASE_URI_Folder = "/";
+var constant = {
+    APP_AUTHENTICATE_USER: BASE_URI_Folder + 'Account/AuthenticateUser',
+    APP_GET_PRODUCT_BY_ID: BASE_URI_Folder+'Home/GetProductByID'
+}

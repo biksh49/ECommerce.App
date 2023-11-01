@@ -2,16 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 @model List<ProductViewModel>
-@foreach(var product in Model)
-{
-    <div class="card" style="width: 18rem;">
-        <img src="@product.Image" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">@product.Name</h5>
-            <p class="card-text">@product.Description</p>
-            <a href="#" class="btn btn-primary">@product.Price</a>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <a href="#" id="lnkProductDescription" data-id="@product.Sku">
+                <div class="card mb-3">
+                    <img src="@product.Image" class="card-img-top" alt="..." style="height:14rem;width:14rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">Rs.@product.Price</p>
+                        
+                    </div>
+                </div>
+            </a>
+            
         </div>
-    </div>
-}
+    }
+</div>
 
 

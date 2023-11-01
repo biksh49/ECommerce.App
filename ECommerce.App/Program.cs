@@ -39,6 +39,7 @@ builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddTransient<IDbHelper,DbHelper>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 
