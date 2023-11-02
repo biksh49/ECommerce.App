@@ -18,6 +18,10 @@ var authentication = (function () {
             var productID = e.currentTarget.getAttribute("data-id");
             getProductByID(productID);
         });
+        $('body').on('click', '#lnkBuy', function (e) {
+            var productID = e.currentTarget.getAttribute("data-id");
+            buyProduct(productID);
+        });
         $('body').on('click', '#lnkSignUp', function (e) {
             //console.log("Here");
             registerUser(e);
@@ -29,6 +33,12 @@ var authentication = (function () {
 
         });
         
+    }
+    function buyProduct(productID) {
+        helper.makeRequest(constant.APP_BUY_PRODUCT_BY_ID + "?id=" + productID + "", "get", "application/json", null, function (response) {
+
+            $("#content-wrapper").html(response);
+        });
     }
     function getProductByID(productID) {
      
@@ -49,10 +59,10 @@ var authentication = (function () {
         var password = $("#exampleFormControlInput2").val();
         const authenticateUser = { email: email, password: password };
         const data = JSON.stringify(authenticateUser);
+
+     
         helper.makeRequest(constant.APP_AUTHENTICATE_USER, "post", "application/json", data, function (response) {
-           
-            $("#content-wrapper").html(response);
-             //window.location.reload(true);
+            $(location).attr("href", BASE_URI_Folder);
         });
     } 
     function registerUser(e) {

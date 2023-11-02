@@ -25,5 +25,11 @@ namespace ECommerce.App.Service
         {
             throw new NotImplementedException();
         }
+
+        public List<DeliveryAddress> GetUserDelieveryAddressByID(int userID)
+        {
+            var deliveryAddress=_userRepository.GetDeliveryAddressByID(userID);
+            return deliveryAddress;
+        }
     }
 }

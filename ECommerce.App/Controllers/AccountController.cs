@@ -42,9 +42,15 @@ namespace ECommerce.App.Controllers
             //ViewBag.States=_dbHelper.GetStates();
             return View(signUpViewModel);
         }
-        public IActionResult LogOut()
+        public IActionResult SignOut()
         {
-            return null;
+           
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+            return RedirectToAction("Index","Account");
+           
         }
 
         [AllowAnonymous]

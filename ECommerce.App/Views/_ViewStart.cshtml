@@ -1,3 +1,17 @@
 ﻿@{
-    Layout = "_Layout";
+    string userName = string.Empty;
+}
+@{
+    var value = ((System.Security.Claims.ClaimsIdentity)User.Identity)?.FindFirst("UserName")?.Value;
+
+    userName = value;
+    @if (!string.IsNullOrEmpty(userName))
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_StartupLayout";
+    }
+
 }

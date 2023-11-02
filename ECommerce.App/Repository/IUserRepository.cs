@@ -8,5 +8,6 @@ namespace ECommerce.App.Repository
         public List<User> GetAllUsers();
         public User UpdateUser(User user);
         public void RegisterUser(User user);
+        public List<DeliveryAddress> GetDeliveryAddressByID(int userID);
     }
 }

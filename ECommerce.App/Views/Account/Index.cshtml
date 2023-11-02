@@ -1,18 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center backgroundBroadway">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div class="card mb-3" style="width: 18rem;">
+<div style="display: flex;justify-content: end;align-items: center;height: 80vh;">
+    <div class="card" style="height: 60vh;width: 30rem;">
+        
+        <div class="card-header">
+            SignIn
+        </div>
         <div class="card-body">
-            <h5 class="card-title">Are you a new user?</h5>
-            <p class="card-text">Please click below to sign up!!</p>
-            <a href="@Url.Action("SignUp","Account")" class="btn btn-primary">SignUp</a>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" name="userName" placeholder="name@example.com">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleFormControlInput2" name="password" placeholder="password">
+                </div>
+
+                <div class="mb-3 mt-3 ">
+                    <button class="btn btn-primary" id="lnkSubmit">Submit</button>
+                </div>
+            </div>
+            <div>
+                <h5 class="card-title">Are you a new user?</h5>
+                <p class="card-text">Please click below to sign up!!</p>
+                <a href="@Url.Action("SignUp","Account")" class="btn btn-primary">SignUp</a>
+            </div>
+
+
+
+
+
         </div>
     </div>
 
-
 </div>
+
+
+
 

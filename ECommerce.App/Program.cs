@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", o =>
 {
     o.Cookie.Name = ".MyApp";
-    o.LoginPath = "/home/index";
+    o.LoginPath = "/Account/index";
     o.SlidingExpiration = true;
     o.ExpireTimeSpan = TimeSpan.FromHours(12);
 
@@ -72,6 +72,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

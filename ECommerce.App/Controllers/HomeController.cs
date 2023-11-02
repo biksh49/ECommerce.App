@@ -23,8 +23,9 @@ namespace ECommerce.App.Controllers
         private readonly ConnectionStrings _dbContext;
         private readonly ConnectionStrings _conn;
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
-        public HomeController(ConnectionStrings dbContexts,ILogger<HomeController> logger,IDbHelper dbHelper,IAuthService authService,IConfiguration configuration,IOptions<ConnectionStrings> dbContext,ConnectionStrings conn,IProductService productService)
+        public HomeController(ConnectionStrings dbContexts,ILogger<HomeController> logger,IDbHelper dbHelper,IAuthService authService,IConfiguration configuration,IOptions<ConnectionStrings> dbContext,ConnectionStrings conn,IProductService productService,IUserService userService)
         {
             _dbContexts = dbContexts;
             _logger = logger;
@@ -34,6 +35,7 @@ namespace ECommerce.App.Controllers
             _dbContext = dbContext.Value;
             _conn = conn;
             _productService = productService;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -144,6 +146,20 @@ namespace ECommerce.App.Controllers
             try
             {
                 var productDetails=_productService.GetProductByID(id);
+                return PartialView(productDetails);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public IActionResult BuyProductByID(int id)
+        {
+            try
+            {
+                var productDetails = _productService.GetProductByID(id);
+                var delieveryDetails = _userService.GetUserDelieveryAddressByID(id);
                 return PartialView(productDetails);
             }
             catch (Exception ex)

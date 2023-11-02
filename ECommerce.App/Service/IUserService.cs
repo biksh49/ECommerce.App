@@ -6,5 +6,6 @@ namespace ECommerce.App.Service
     {
         public User GetUserByID(int id);
         public void CreateUser(User user);
+        public  List<DeliveryAddress> GetUserDelieveryAddressByID(int userID);
     }
 }
