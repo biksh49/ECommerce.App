@@ -33,10 +33,8 @@ namespace ECommerce.App.Controllers
         public IActionResult SignUp()
         {
             SignUpViewModel signUpViewModel = new SignUpViewModel();
-            
             var states=_dbHelper.GetStates();
             var districts=_dbHelper.GetDistricts();
-
             signUpViewModel.State =states;
             signUpViewModel.District =districts;
             //ViewBag.States=_dbHelper.GetStates();
@@ -58,6 +56,7 @@ namespace ECommerce.App.Controllers
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
+           
             if(!ModelState.IsValid)
             {
                 return BadRequest("Please fill up the required field!");
@@ -66,7 +65,6 @@ namespace ECommerce.App.Controllers
            
             if (userDetails!=null)
             {
-
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Role, "user"),

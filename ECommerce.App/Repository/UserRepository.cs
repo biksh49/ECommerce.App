@@ -27,14 +27,13 @@ namespace ECommerce.App.Repository
             
         }
 
-        public IEnumerable<DeliveryAddress> GetDeliveryAddressByID(int userID)
+        public List<DeliveryAddress> GetDeliveryAddressByID(int userID)
         {
             var sql = $"select * from tblUserAddress where userID={userID}";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                var user = connection.Query<User>(sql);
-                return (IEnumerable<DeliveryAddress>)user;
-
+                var userDeliveryAddress = connection.Query<DeliveryAddress>(sql);
+                return userDeliveryAddress.ToList();
             }
 
         }
@@ -66,5 +65,7 @@ namespace ECommerce.App.Repository
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

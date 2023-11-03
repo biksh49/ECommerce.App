@@ -22,11 +22,7 @@
                     alert("Page Not Found!!");
                     break;
                 case 400:
-                    document.getElementById('toastMessageBody').innerText = xhr.responseText;
-                    var head = document.getElementById('toastheadertext');
-                    head.style.color = 'red';
-                    head.innerText = 'Error';
-                    $('.toast').toast('show');
+                    alert("The password or username is incorrect!!");
                     break;
                 default:
                     alert('An error occurred');

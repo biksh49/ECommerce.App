@@ -34,8 +34,7 @@ namespace ECommerce.App.Controllers
             _configuration = configuration;
             _dbContext = dbContext.Value;
             _conn = conn;
-            _productService = productService;
-            _userService = userService;
+          
         }
 
         public IActionResult Index()
@@ -141,32 +140,6 @@ namespace ECommerce.App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult GetProductByID(int id)
-        {
-            try
-            {
-                var productDetails=_productService.GetProductByID(id);
-                return PartialView(productDetails);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-        public IActionResult BuyProductByID(int id)
-        {
-            try
-            {
-                var productDetails = _productService.GetProductByID(id);
-                var delieveryDetails = _userService.GetUserDelieveryAddressByID(id);
-                return PartialView(productDetails);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        
     }
 }
