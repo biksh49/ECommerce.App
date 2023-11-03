@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 
+
 namespace ECommerce.App.Controllers
 {
 
@@ -70,46 +71,46 @@ namespace ECommerce.App.Controllers
         public IActionResult Authenticate([FromForm] AuthenticateUser user)
         {
 
-            bool userDetails = _authService.AuthenticateUser(user.Email, user.Password);
-            if (userDetails)
+            //bool userDetails = _authService.AuthenticateUser(user.Email, user.Password);
+            //if (userDetails)
+            //{
+            //    return View(user);
+            //}
+            //else
+            //{
+            //    return View("Unauthorized");
+            //}
+            //this code is for   Authenticate or not in bool return and shows view page according to the suitation.
+
+            var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
+            if (userDetails != null)
             {
-                return View(user);
+
+                var userClaims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Role, "user"),
+                        new Claim("UserName",$"{userDetails.Name}"),
+                        new Claim("UserId",$"{userDetails.ID}"),
+                        new Claim("Email",$"{userDetails.Email}")
+
+                    };
+                var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principles = new ClaimsPrincipal();
+                principles.AddIdentity(id);
+                HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
+                {
+                    ExpiresUtc = DateTime.UtcNow.AddHours(8),
+                    IsPersistent = true,
+                    AllowRefresh = false,
+                });
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View("Unauthorized");
+                //return RedirectToAction("Index", "Home");
+                return PartialView("UnAuthorized");
             }
-            ////this code is for   Authenticate or not in bool return and shows view page according to the suitation.
-
-            //    var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
-            //    if (userDetails != null)
-            //    {
-
-            //        var userClaims = new List<Claim>()
-            //        {
-            //            new Claim(ClaimTypes.Role, "user"),
-            //            new Claim("UserName",$"{userDetails.Name}"),
-            //            new Claim("UserId",$"{userDetails.ID}"),
-            //            new Claim("Email",$"{userDetails.Email}")
-
-            //        };
-            //        var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-            //        var principles = new ClaimsPrincipal();
-            //        principles.AddIdentity(id);
-            //        HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
-            //        {
-            //            ExpiresUtc = DateTime.UtcNow.AddHours(8),
-            //            IsPersistent = true,
-            //            AllowRefresh = false,
-            //        });
-
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    else
-            //    {
-            //        //return RedirectToAction("Index", "Home");
-            //        return PartialView("UnAuthorized");
-            //    }
 
         }
         [HttpPost]

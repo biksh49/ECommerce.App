@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.App.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class HomeController : Controller
     {
 
@@ -41,7 +41,7 @@ namespace ECommerce.App.Controllers
             string products = sr.ReadToEnd();
             sr.Close();
             List<ProductViewModel> databaseUser = JsonConvert.DeserializeObject<List<ProductViewModel>>(products);
-            return PartialView(databaseUser);
+            return View(databaseUser);
         }
 
 
