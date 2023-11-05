@@ -17,4 +17,8 @@
     <None Remove="Helper\" />
     <None Remove="Service\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Order\" />
+  </ItemGroup>
 </Project>

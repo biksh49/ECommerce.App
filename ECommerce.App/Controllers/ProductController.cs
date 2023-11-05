@@ -1,4 +1,5 @@
-﻿using ECommerce.App.Service;
+﻿using ECommerce.App.Models;
+using ECommerce.App.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.App.Controllers
@@ -27,11 +28,17 @@ namespace ECommerce.App.Controllers
         }
         public IActionResult BuyProductByID(int id)
         {
+            BuyViewModel buyViewModel = new BuyViewModel();
             try
             {
                 var productDetails = _productService.GetProductByID(id);
-                var delieveryDetails = _userService.GetUserDelieveryAddressByID(id);
-                return PartialView(productDetails);
+                var userID = ((System.Security.Claims.ClaimsIdentity)User.Identity)?.FindFirst("UserId")?.Value;
+
+               
+                var delieveryDetails = _userService.GetUserDelieveryAddressByID(int.Parse(userID));
+                buyViewModel.DeliveryAddresses=delieveryDetails;
+                buyViewModel.ProductViewModel = productDetails;
+                return PartialView("ProductDetails", buyViewModel);
             }
             catch (Exception ex)
             {

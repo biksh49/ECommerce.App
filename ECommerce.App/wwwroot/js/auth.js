@@ -22,6 +22,15 @@ var authentication = (function () {
             var productID = e.currentTarget.getAttribute("data-id");
             buyProduct(productID);
         });
+        $('body').on('click', '#lnkAddDeliveryAddress', function (e) {
+            
+            addDeliveryAddress();
+        });
+        $('body').on('click', '#lnkPlaceOrder', function (e) {
+            var productID = e.currentTarget.getAttribute("data-id");
+            var deliveryAddressID = e.currentTarget.getAttribute("deliveryAddressID");
+            placeOrder(productID, deliveryAddressID);
+        });
         $('body').on('click', '#lnkSignUp', function (e) {
             //console.log("Here");
             registerUser(e);
@@ -33,6 +42,15 @@ var authentication = (function () {
 
         });
         
+    }
+    function addDeliveryAddress() {
+
+    }
+    function placeOrder(productID, deliveryAddressID) {
+        helper.makeRequest(constant.APP_PLACE_ORDER + "?productID=" + productID + "" + "&deliveryAddressID=" + deliveryAddressID+"", "get", "application/json", null, function (response) {
+
+            $("#content-wrapper").html(response);
+        });
     }
     function buyProduct(productID) {
         helper.makeRequest(constant.APP_BUY_PRODUCT_BY_ID + "?id=" + productID + "", "get", "application/json", null, function (response) {

@@ -2,5 +2,6 @@
 var constant = {
     APP_AUTHENTICATE_USER: BASE_URI_Folder + 'Account/AuthenticateUser',
     APP_GET_PRODUCT_BY_ID: BASE_URI_Folder+'Product/GetProductByID',
-    APP_BUY_PRODUCT_BY_ID: BASE_URI_Folder+'Product/BuyProductByID'
+    APP_BUY_PRODUCT_BY_ID: BASE_URI_Folder+'Product/BuyProductByID',
+    APP_PLACE_ORDER: BASE_URI_Folder+'Order/PlaceOrder'
 }
