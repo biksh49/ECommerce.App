@@ -56,17 +56,15 @@
     }
 
     function registerUser() {
-        var name = $("#Name").val();
-        var age = $("#Age").val();
-        var email = $("#Email").val();
-       
-        var contactNumber = $("#ContactNumber").val();
-        var password = $("#Password").val();
-     
-        var postCode = $("#PostCode").val();
-        var stateID = $("#inputState").val();
-        var districtID = $("#inputDistrict").val();
-        var cityID = $("#inputCity").val();
+        var name = $("#inputName").val();
+        var age = $("#inputAge").val();
+        var email = $("#inputEmail4").val();
+        var contactNumber = $("#inputContactNumber").val();
+        var password = $("#inputPassword4").val();
+        var postCode = $("#inputPostCode").val();
+        var stateID = $('select#inputState option:selected').attr('itemid');
+        var districtID = $('select#inputDistrict option:selected').attr('itemid');
+        var cityID = $('select#inputCity option:selected').attr('itemid');
 
         var registerUser = {
             Name: name,
@@ -83,7 +81,15 @@
         const data = JSON.stringify(registerUser);
 
         helper.makeRequest("/Account/RegisterUser", "post", "application/json", data, function (response) {
-            $("#content-wrapper").html(response);
+            //if (response.success) {
+            //    // Registration was successful, handle as needed
+            //    alert("Registration successful!");
+            //    // You can redirect or update the UI as appropriate
+            //} else {
+            //    // Handle registration failure, show an error message, etc.
+            //    alert("Registration failed: " + response.errorMessage);
+            //}
         });
     }
+
 })();

@@ -1,10 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿﻿@using ECommerce.App.Models
 @model AuthenticateUser
+@{
+    <div>@ViewBag.User</div>
+    <div>Hi @Model.Email</div>
+    <div>Hi @Model.Password</div>
 
-<div>@ViewBag.User</div>
-<div>Hello @Model.Email</div>
-<div>@Model.Password</div>
+}

@@ -43,7 +43,8 @@ namespace ECommerce.App.Repository
 
         public void RegisterUser(User user)
         {
-            var sql = $"Insert into tblUser values ('{user.Name}',{user.Age},'{user.Email}',null,'{user.PostCode}','{user.Password}','{user.StateID}''{user.DistrictID}''{user.CityID}')";
+            // sequence of datashould be maintaince in this formate of   SQL Qurery//
+            var sql = $"Insert into tblUser values ('{user.Name}',{user.Age},'{user.Email}',{user.ContactNumber},'{user.PostCode}','{user.Password}','{user.StateID}','{user.DistrictID}','{user.CityID}')";
             using (var connection = new SqlConnection(ECommerce.App.Helper.Constant.ConnectionString_MSSQL))
             {
                 connection.Execute(sql);
@@ -51,6 +52,7 @@ namespace ECommerce.App.Repository
 
             }
         }
+      
 
 
         public User UpdateUser(User user)
