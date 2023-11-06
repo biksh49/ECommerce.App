@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="~/css/about.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arial GEO:wght@700&display=swap" />
+    <link rel="icon" type="image/x-icon" href="~/public/company-logo1@2x.png" sizes="32x32">
+    @RenderSection("Head", required: false)
+</head>
+<body>
+    <div class="e-commerce-app">
+        <!-- Widget-bar -->
+        <div class="widget-bar">
+            <div class="widget-bar1">
+                <div class="widget-bar-child">
+                </div>
+                <a href="https://www.instagram.com/sthpranab/?next=%2F">
+                    <img class="instagram-icon2x-1" alt="" src="~/public/instagram-icon@2x.png">
+                </a>
+                <a href="https://www.facebook.com/pranab.shrestha.4">
+                    <img class="facebook-icon" alt="" src="~/public/facebook-icon.png">
+                </a>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar1"></div>
+            <img class="company-logo-icon" alt="" src="~/public/company-logo@2x.png" />
+            <b class="home"><a href="~/"> Home</a></b>
+            <b class="about"><a href="~/Home/About"> About</a></b>
+            <b class="shop"><a href="~/Home/Shop"> Shop</a></b>
+            <b class="explore"><a href="#explore"> Explore</a></b>
+            <b class="contact"><a href="~/Home/Contact"> Contact</a></b>
+            <button class="shopping-cart-button">
+                <div class="shopping-cart-button1"></div>
+                <img class="shopping-cart-icon" alt="" src="~/public/shoppingcarticon@2x.png" />
+            </button>
+        </div>
+
+
+        <div class="container">
+            @RenderBody()
+        </div>
+
+        <!-- Footer-top -->
+        <div class="footer-top">
+            <div class="footer-top1"></div>
+            <img class="company-logo-icon1" alt="" src="~/public/company-logo1@2x.png" />
+            <b class="text">
+                <p class="the-goal-of">The goal of the GearVentures Nepal is to</p>
+                <p class="the-goal-of"> fulfill the requirements of Nepali motorcycle </p>
+                <p class="the-goal-of"> riders with genuine and quality international </p>
+                <p class="the-goal-of">products to improve their riding experience</p>
+                <p class="the-goal-of">and safety.</p>
+            </b>
+
+            <img class="map-icon" alt="" src="~/public/mapicon@2x.png" />
+            <b class="location">Anamnagar Kathmandu</b>
+            <img class="mail-icon" alt="" src="~/public/mailicon@2x.png" />
+            <b class="mail">pranabshrestha4@gmail.com</b>
+            <img class="phone-icon" alt="" src="~/public/phoneicon@2x.png" />
+            <b class="phone-number">9861143145</b>
+            <b class="contact-us">Contact Us</b>
+            <div class="email-box">
+                <div class="email-box1">
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="message-box">
+                <textarea class="message-input" placeholder="Message"></textarea>
+            </div>
+
+            <button class="message-button">
+                <span class="message-button-text"> Send Message </span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer1"></div>
+            <div class="footer-text">
+                <b class="copyright-gearventures-nepal">
+                    2023 Copyright GearVentures Nepal All rights Reserved
+                </b>
+                <b class="developed-by-pranab">Developed by Pranab Shrestha</b>
+        </div>
+    </div>
+        <script src="~/js/footer-animation.js"></script>
+        <script src="~/js/imageslider.js"></script>
+        <script src="~/js/scale-up-animation-footer-top.js"></script>
+        <script src="~/js/scale-up-animation.js"></script>
+        <script src="~/js/scale-up-animation-about-us.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
