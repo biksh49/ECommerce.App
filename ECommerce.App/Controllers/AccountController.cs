@@ -14,12 +14,14 @@ namespace ECommerce.App.Controllers
         private readonly IAuthService _authService;
         private readonly IDbHelper _dbHelper;
         private readonly IUserService _userService;
+        private readonly IMailService _mailService;
 
-        public AccountController(IAuthService authService,IDbHelper dbHelper,IUserService userService) 
+        public AccountController(IAuthService authService,IDbHelper dbHelper,IUserService userService,IMailService mailService) 
         {
             _authService = authService;
             _dbHelper = dbHelper;
             _userService = userService;
+            _mailService = mailService;
         }
 
         public IActionResult SignIn()
@@ -62,7 +64,13 @@ namespace ECommerce.App.Controllers
                 return BadRequest("Please fill up the required field!");
             }
             var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
-           
+            MailRequest mailRequest = new MailRequest();
+            mailRequest.Subject = "Welcome to Ecommerce";
+            mailRequest.Body = "You have reccently login in windows";
+            mailRequest.ToEmail = "biksh49@gmail.com";
+            _mailService.SendEmailAsync(mailRequest);
+
+
             if (userDetails!=null)
             {
                 var userClaims = new List<Claim>()

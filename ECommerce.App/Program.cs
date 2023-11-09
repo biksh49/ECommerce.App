@@ -4,6 +4,7 @@ using ECommerce.App.Models;
 using ECommerce.App.Repository;
 using ECommerce.App.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,7 @@ builder.Services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuth
 });
 builder.Services.AddControllersWithViews();
 var db=builder.Configuration.GetSection("ConnectionStrings:DefaultConnection");
+
 //builder.Services.AddOptions<ConnectionStrings>().BindConfiguration(nameof(ConnectionStrings))
 //    .ValidateDataAnnotations()
 //    .ValidateOnStart();
@@ -33,12 +35,14 @@ var db=builder.Configuration.GetSection("ConnectionStrings:DefaultConnection");
 
 var dbContext=builder.Configuration.GetSection(nameof(ConnectionStrings)).Get<ConnectionStrings>();
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection"));
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 //var weatherOptions = builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Get<ConnectionStrings>();
 builder.Services.AddSingleton(dbContext);
 builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddTransient<IDbHelper,DbHelper>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient <IMailService, MailService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 

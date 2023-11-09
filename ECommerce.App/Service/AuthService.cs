@@ -36,7 +36,7 @@ namespace ECommerce.App.Service
             var sql = $"select * from tblUser where Email='{email}' and password='{password}'";
             using (var connection = new SqlConnection(Helper.Constant.ConnectionString_MSSQL))
             {
-                var user = connection.QueryFirstOrDefault<User>(sql);
+                var user =  connection.QueryFirstOrDefault<User>(sql);
 
                 return user;
             }
