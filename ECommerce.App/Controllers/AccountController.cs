@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using log4net;
 
 namespace ECommerce.App.Controllers
 {
@@ -15,13 +16,15 @@ namespace ECommerce.App.Controllers
         private readonly IDbHelper _dbHelper;
         private readonly IUserService _userService;
         private readonly IMailService _mailService;
+        private readonly ILog _logger;
 
-        public AccountController(IAuthService authService,IDbHelper dbHelper,IUserService userService,IMailService mailService) 
+        public AccountController(IAuthService authService,IDbHelper dbHelper,IUserService userService,IMailService mailService,ILog logger) 
         {
             _authService = authService;
             _dbHelper = dbHelper;
             _userService = userService;
             _mailService = mailService;
+            _logger = logger;
         }
 
         public IActionResult SignIn()
@@ -58,22 +61,23 @@ namespace ECommerce.App.Controllers
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]AuthenticateUser user)
         {
-           
-            if(!ModelState.IsValid)
+            try
             {
-                return BadRequest("Please fill up the required field!");
-            }
-            var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
-            MailRequest mailRequest = new MailRequest();
-            mailRequest.Subject = "Welcome to Ecommerce";
-            mailRequest.Body = "You have reccently login in windows";
-            mailRequest.ToEmail = "biksh49@gmail.com";
-            _mailService.SendEmailAsync(mailRequest);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Please fill up the required field!");
+                }
+                var userDetails = _authService.AuthenticateUser(user.Email, user.Password);
+                MailRequest mailRequest = new MailRequest();
+                mailRequest.Subject = "Welcome to Ecommerce";
+                mailRequest.Body = "You have reccently login in windows";
+                mailRequest.ToEmail = "biksh49@gmail.com";
+                _mailService.SendEmailAsync(mailRequest);
 
 
-            if (userDetails!=null)
-            {
-                var userClaims = new List<Claim>()
+                if (userDetails != null)
+                {
+                    var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Role, "user"),
                     new Claim("UserName",$"{userDetails.Name}"),
@@ -81,22 +85,32 @@ namespace ECommerce.App.Controllers
                     new Claim("Email",$"{userDetails.Email}")
 
                 };
-                var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principles = new ClaimsPrincipal();
-                principles.AddIdentity(id);
-                HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
+                    var id = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principles = new ClaimsPrincipal();
+                    principles.AddIdentity(id);
+                    HttpContext.SignInAsync("CookieAuthentication", principles, new AuthenticationProperties()
+                    {
+                        ExpiresUtc = DateTime.UtcNow.AddHours(8),
+                        IsPersistent = true,
+                        AllowRefresh = false,
+                    });
+                    return RedirectToAction("Index", "Home");
+                }
+                else
                 {
-                    ExpiresUtc = DateTime.UtcNow.AddHours(8),
-                    IsPersistent = true,
-                    AllowRefresh = false,
-                });
-                return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return PartialView("UnAuthorized");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //return RedirectToAction("Index", "Home");
-                return PartialView("UnAuthorized");
+                IDictionary<string,object> parameters= new Dictionary<string, object>();
+                parameters.Add("email", user.Email);
+                _logger.Error(ex.Message,ex);
+                throw;
             }
+           
+           
             
         }
         [HttpPost]

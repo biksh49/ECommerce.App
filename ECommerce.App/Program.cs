@@ -1,4 +1,5 @@
 using System.Globalization;
+using ECommerce.App;
 using ECommerce.App.Helper;
 using ECommerce.App.Models;
 using ECommerce.App.Repository;
@@ -22,6 +23,7 @@ builder.Services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuth
     o.Cookie.SameSite = SameSiteMode.Strict;
 });
 builder.Services.AddControllersWithViews();
+
 var db=builder.Configuration.GetSection("ConnectionStrings:DefaultConnection");
 
 //builder.Services.AddOptions<ConnectionStrings>().BindConfiguration(nameof(ConnectionStrings))
@@ -45,6 +47,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient <IMailService, MailService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddLog4net();
 
 
 

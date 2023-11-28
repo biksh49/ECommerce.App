@@ -39,6 +39,15 @@ namespace ECommerce.App.Controllers
 
         public  IActionResult Index()
         {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             StreamReader sr = new StreamReader("products.json");
             string products = sr.ReadToEnd();
             sr.Close();
