@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ECommerce.App.Models.ProductViewModel
+<div class="card" style="width: 18rem;">
+    <img src="@Model.Image" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <p class="card-text">@Model.Manufacturer</p>
+        @foreach(var cat in Model.Category)
+        {
+           <p>@cat.Name</p>
+        }
+        
+        <p class="card-text">@Model.Model</p>
+        
+        <p class="card-text">@Model.Url</p>
+        <a href="#" class="btn btn-primary">@Model.Price</a>
+        <a href="#" class="btn btn-info" id="lnkBuy" data-id="@Model.Sku">Buy Now</a>
+        <a href="#" class="btn btn-warning">Add to Cart</a>
+
+    </div>
+</div>

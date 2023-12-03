@@ -21,7 +21,7 @@ body {
     background-size: cover; /* Cover the entire element while maintaining aspect ratio */
     background-repeat: no-repeat; /* Prevent image repetition */
     height: 100vh;
-    max-height: 80vh; /* Adjust the maximum height as needed */
+    max-height:100vh; /* Adjust the maximum height as needed */
     overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
-    padding: 20px; /* Add padding as needed for spacing */
+    padding: 10px; /* Add padding as needed for spacing */
 }

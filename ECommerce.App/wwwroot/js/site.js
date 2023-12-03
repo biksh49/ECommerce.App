@@ -1,12 +1,12 @@
 ﻿
     //console.log(authentication.authenticateUser());
-    $(document).ready(function () {
+$(document).ready(function () {
+        //appConstants.initialize();
+        authentication.initialize();
+        //constant.initialize();
+        //authentication.authenticateUser();
         
-        //authentication.initialize();
-        $('body').on('click', '#linkSubmit', function () {
-            console.log("Here");
-            authentication.authenticateUser();
-        });
+        
     });
 
 
